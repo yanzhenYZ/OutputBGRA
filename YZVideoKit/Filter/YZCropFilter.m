@@ -11,12 +11,14 @@
 #import "YZVideoData.h"
 #import "YZMetalDevice.h"
 #import "YZMetalOrientation.h"
+#import "YZBGRAPixelBuffer.h"
 
 @interface YZCropFilter ()
 @property (nonatomic, assign) CVMetalTextureCacheRef textureCache;
 @property (nonatomic, strong) id<MTLRenderPipelineState> pipelineState;
 
 @property (nonatomic, strong) YZPixelBuffer *pixelBuffer;
+@property (nonatomic, strong) YZBGRAPixelBuffer *bgraBuffer;
 @end
 
 @implementation YZCropFilter
@@ -27,6 +29,14 @@
         CFRelease(_textureCache);
         _textureCache = nil;
     }
+}
+
+- (YZBGRAPixelBuffer *)bgraBuffer {
+    if (!_bgraBuffer) {
+        _bgraBuffer = [[YZBGRAPixelBuffer alloc] init];
+        [_bgraBuffer setOutputPixelBuffer:_pixelBuffer];
+    }
+    return _bgraBuffer;
 }
 
 - (instancetype)init
@@ -57,7 +67,7 @@
         if (videoData.rotation == 0) {
             [_pixelBuffer outoutPixelBuffer:videoData.pixelBuffer];
         } else {
-            [self rotation32BGRA:videoData.pixelBuffer rotation:videoData.rotation];
+            [self.bgraBuffer inputVideo:videoData];
         }
     } else if (type == kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange) {
         if (videoData.rotation == 0) {
@@ -68,6 +78,11 @@
     }
 }
 
+
+
+
+
+//no use
 - (void)rotation32BGRA:(CVPixelBufferRef)pixelBuffer rotation:(int)rotation {
     int width = (int)CVPixelBufferGetWidth(pixelBuffer);
     int height = (int)CVPixelBufferGetHeight(pixelBuffer);

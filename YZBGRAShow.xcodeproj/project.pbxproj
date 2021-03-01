@@ -32,6 +32,8 @@
 		9B9C6B9825ECEFDE008FC649 /* YZYUVToRGBConversion.metal in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6B9725ECEFDE008FC649 /* YZYUVToRGBConversion.metal */; };
 		9B9C6BA225ECF431008FC649 /* YZMetalOrientation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B9C6BA025ECF431008FC649 /* YZMetalOrientation.h */; };
 		9B9C6BA325ECF431008FC649 /* YZMetalOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6BA125ECF431008FC649 /* YZMetalOrientation.m */; };
+		9B9C6BA725ECF81C008FC649 /* YZBGRAPixelBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B9C6BA525ECF81C008FC649 /* YZBGRAPixelBuffer.h */; };
+		9B9C6BA825ECF81C008FC649 /* YZBGRAPixelBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6BA625ECF81C008FC649 /* YZBGRAPixelBuffer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +91,8 @@
 		9B9C6B9725ECEFDE008FC649 /* YZYUVToRGBConversion.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = YZYUVToRGBConversion.metal; sourceTree = "<group>"; };
 		9B9C6BA025ECF431008FC649 /* YZMetalOrientation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZMetalOrientation.h; sourceTree = "<group>"; };
 		9B9C6BA125ECF431008FC649 /* YZMetalOrientation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZMetalOrientation.m; sourceTree = "<group>"; };
+		9B9C6BA525ECF81C008FC649 /* YZBGRAPixelBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZBGRAPixelBuffer.h; sourceTree = "<group>"; };
+		9B9C6BA625ECF81C008FC649 /* YZBGRAPixelBuffer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZBGRAPixelBuffer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +201,8 @@
 			children = (
 				9B9C6B8525ECE629008FC649 /* YZPixelBuffer.h */,
 				9B9C6B8625ECE629008FC649 /* YZPixelBuffer.m */,
+				9B9C6BA525ECF81C008FC649 /* YZBGRAPixelBuffer.h */,
+				9B9C6BA625ECF81C008FC649 /* YZBGRAPixelBuffer.m */,
 			);
 			path = Output;
 			sourceTree = "<group>";
@@ -221,6 +227,7 @@
 				9B9C6B8D25ECE6BB008FC649 /* YZCropFilter.h in Headers */,
 				9B9C6B5F25ECDE54008FC649 /* YZVideoKit.h in Headers */,
 				9B9C6B7925ECE14D008FC649 /* YZVideoData.h in Headers */,
+				9B9C6BA725ECF81C008FC649 /* YZBGRAPixelBuffer.h in Headers */,
 				9B9C6B7325ECE044008FC649 /* YZMetalDevice.h in Headers */,
 				9B9C6B8725ECE629008FC649 /* YZPixelBuffer.h in Headers */,
 				9B9C6BA225ECF431008FC649 /* YZMetalOrientation.h in Headers */,
@@ -341,6 +348,7 @@
 			files = (
 				9B9C6B7425ECE044008FC649 /* YZMetalDevice.m in Sources */,
 				9B9C6BA325ECF431008FC649 /* YZMetalOrientation.m in Sources */,
+				9B9C6BA825ECF81C008FC649 /* YZBGRAPixelBuffer.m in Sources */,
 				9B9C6B9825ECEFDE008FC649 /* YZYUVToRGBConversion.metal in Sources */,
 				9B9C6B8825ECE629008FC649 /* YZPixelBuffer.m in Sources */,
 				9B9C6B9525ECEFD1008FC649 /* YZVertexFragment.metal in Sources */,
