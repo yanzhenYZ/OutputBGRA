@@ -8,27 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		9B9C6B0F25ECD139008FC649 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6B0E25ECD139008FC649 /* AppDelegate.m */; };
-		9B9C6B1225ECD139008FC649 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6B1125ECD139008FC649 /* SceneDelegate.m */; };
-		9B9C6B1525ECD139008FC649 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6B1425ECD139008FC649 /* ViewController.m */; };
 		9B9C6B1825ECD139008FC649 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B9C6B1625ECD139008FC649 /* Main.storyboard */; };
 		9B9C6B1A25ECD13B008FC649 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B9C6B1925ECD13B008FC649 /* Assets.xcassets */; };
 		9B9C6B1D25ECD13B008FC649 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B9C6B1B25ECD13B008FC649 /* LaunchScreen.storyboard */; };
 		9B9C6B2025ECD13B008FC649 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6B1F25ECD13B008FC649 /* main.m */; };
+		9B9C6B3325ECD72E008FC649 /* BGRA.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B9C6B3125ECD72E008FC649 /* BGRA.storyboard */; };
+		9B9C6B3925ECD754008FC649 /* BGRAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6B3825ECD754008FC649 /* BGRAViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9B9C6B0A25ECD139008FC649 /* YZBGRAShow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YZBGRAShow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B9C6B0D25ECD139008FC649 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9B9C6B0E25ECD139008FC649 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		9B9C6B1025ECD139008FC649 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
-		9B9C6B1125ECD139008FC649 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		9B9C6B1325ECD139008FC649 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		9B9C6B1425ECD139008FC649 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		9B9C6B1725ECD139008FC649 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9B9C6B1925ECD13B008FC649 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9B9C6B1C25ECD13B008FC649 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9B9C6B1E25ECD13B008FC649 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B9C6B1F25ECD13B008FC649 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9B9C6B3225ECD72E008FC649 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/BGRA.storyboard; sourceTree = "<group>"; };
+		9B9C6B3725ECD754008FC649 /* BGRAViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BGRAViewController.h; sourceTree = "<group>"; };
+		9B9C6B3825ECD754008FC649 /* BGRAViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BGRAViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,17 +62,24 @@
 			children = (
 				9B9C6B0D25ECD139008FC649 /* AppDelegate.h */,
 				9B9C6B0E25ECD139008FC649 /* AppDelegate.m */,
-				9B9C6B1025ECD139008FC649 /* SceneDelegate.h */,
-				9B9C6B1125ECD139008FC649 /* SceneDelegate.m */,
-				9B9C6B1325ECD139008FC649 /* ViewController.h */,
-				9B9C6B1425ECD139008FC649 /* ViewController.m */,
+				9B9C6B3625ECD744008FC649 /* BGRA */,
 				9B9C6B1625ECD139008FC649 /* Main.storyboard */,
+				9B9C6B3125ECD72E008FC649 /* BGRA.storyboard */,
 				9B9C6B1925ECD13B008FC649 /* Assets.xcassets */,
 				9B9C6B1B25ECD13B008FC649 /* LaunchScreen.storyboard */,
 				9B9C6B1E25ECD13B008FC649 /* Info.plist */,
 				9B9C6B1F25ECD13B008FC649 /* main.m */,
 			);
 			path = YZBGRAShow;
+			sourceTree = "<group>";
+		};
+		9B9C6B3625ECD744008FC649 /* BGRA */ = {
+			isa = PBXGroup;
+			children = (
+				9B9C6B3725ECD754008FC649 /* BGRAViewController.h */,
+				9B9C6B3825ECD754008FC649 /* BGRAViewController.m */,
+			);
+			path = BGRA;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,6 +140,7 @@
 			files = (
 				9B9C6B1D25ECD13B008FC649 /* LaunchScreen.storyboard in Resources */,
 				9B9C6B1A25ECD13B008FC649 /* Assets.xcassets in Resources */,
+				9B9C6B3325ECD72E008FC649 /* BGRA.storyboard in Resources */,
 				9B9C6B1825ECD139008FC649 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -145,10 +152,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B9C6B1525ECD139008FC649 /* ViewController.m in Sources */,
+				9B9C6B3925ECD754008FC649 /* BGRAViewController.m in Sources */,
 				9B9C6B0F25ECD139008FC649 /* AppDelegate.m in Sources */,
 				9B9C6B2025ECD13B008FC649 /* main.m in Sources */,
-				9B9C6B1225ECD139008FC649 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +175,14 @@
 				9B9C6B1C25ECD13B008FC649 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		9B9C6B3125ECD72E008FC649 /* BGRA.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9B9C6B3225ECD72E008FC649 /* Base */,
+			);
+			name = BGRA.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -292,12 +306,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 20210301;
+				DEVELOPMENT_TEAM = 7XP66VHL84;
 				INFOPLIST_FILE = YZBGRAShow/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = yanzhen.YZBGRAShow;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.3ttech.bgra;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -309,12 +327,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 20210301;
+				DEVELOPMENT_TEAM = 7XP66VHL84;
 				INFOPLIST_FILE = YZBGRAShow/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = yanzhen.YZBGRAShow;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.3ttech.bgra;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
