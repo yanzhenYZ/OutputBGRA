@@ -6,6 +6,7 @@
 //
 
 #import "BGRAViewController.h"
+#import <YZVideoKit/YZVideoKit.h>
 
 @interface BGRAViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *mainPlayer;

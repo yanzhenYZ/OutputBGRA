@@ -14,7 +14,36 @@
 		9B9C6B2025ECD13B008FC649 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6B1F25ECD13B008FC649 /* main.m */; };
 		9B9C6B3325ECD72E008FC649 /* BGRA.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B9C6B3125ECD72E008FC649 /* BGRA.storyboard */; };
 		9B9C6B3925ECD754008FC649 /* BGRAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6B3825ECD754008FC649 /* BGRAViewController.m */; };
+		9B9C6B5F25ECDE54008FC649 /* YZVideoKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B9C6B5D25ECDE54008FC649 /* YZVideoKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B9C6B6225ECDE54008FC649 /* YZVideoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9C6B5B25ECDE54008FC649 /* YZVideoKit.framework */; };
+		9B9C6B6325ECDE54008FC649 /* YZVideoKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9C6B5B25ECDE54008FC649 /* YZVideoKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9B9C6B6B25ECDE65008FC649 /* YZVideoOutput.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B9C6B6925ECDE65008FC649 /* YZVideoOutput.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B9C6B6C25ECDE65008FC649 /* YZVideoOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6B6A25ECDE65008FC649 /* YZVideoOutput.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9B9C6B6025ECDE54008FC649 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9B9C6B0225ECD139008FC649 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B9C6B5A25ECDE54008FC649;
+			remoteInfo = YZVideoKit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9B9C6B6425ECDE54008FC649 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9B9C6B6325ECDE54008FC649 /* YZVideoKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		9B9C6B0A25ECD139008FC649 /* YZBGRAShow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YZBGRAShow.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -28,10 +57,23 @@
 		9B9C6B3225ECD72E008FC649 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/BGRA.storyboard; sourceTree = "<group>"; };
 		9B9C6B3725ECD754008FC649 /* BGRAViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BGRAViewController.h; sourceTree = "<group>"; };
 		9B9C6B3825ECD754008FC649 /* BGRAViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BGRAViewController.m; sourceTree = "<group>"; };
+		9B9C6B5B25ECDE54008FC649 /* YZVideoKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YZVideoKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B9C6B5D25ECDE54008FC649 /* YZVideoKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZVideoKit.h; sourceTree = "<group>"; };
+		9B9C6B5E25ECDE54008FC649 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B9C6B6925ECDE65008FC649 /* YZVideoOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZVideoOutput.h; sourceTree = "<group>"; };
+		9B9C6B6A25ECDE65008FC649 /* YZVideoOutput.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZVideoOutput.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		9B9C6B0725ECD139008FC649 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B9C6B6225ECDE54008FC649 /* YZVideoKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B9C6B5825ECDE54008FC649 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -45,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				9B9C6B0C25ECD139008FC649 /* YZBGRAShow */,
+				9B9C6B5C25ECDE54008FC649 /* YZVideoKit */,
 				9B9C6B0B25ECD139008FC649 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -53,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				9B9C6B0A25ECD139008FC649 /* YZBGRAShow.app */,
+				9B9C6B5B25ECDE54008FC649 /* YZVideoKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -82,7 +126,30 @@
 			path = BGRA;
 			sourceTree = "<group>";
 		};
+		9B9C6B5C25ECDE54008FC649 /* YZVideoKit */ = {
+			isa = PBXGroup;
+			children = (
+				9B9C6B5D25ECDE54008FC649 /* YZVideoKit.h */,
+				9B9C6B6925ECDE65008FC649 /* YZVideoOutput.h */,
+				9B9C6B6A25ECDE65008FC649 /* YZVideoOutput.m */,
+				9B9C6B5E25ECDE54008FC649 /* Info.plist */,
+			);
+			path = YZVideoKit;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		9B9C6B5625ECDE54008FC649 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B9C6B6B25ECDE65008FC649 /* YZVideoOutput.h in Headers */,
+				9B9C6B5F25ECDE54008FC649 /* YZVideoKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		9B9C6B0925ECD139008FC649 /* YZBGRAShow */ = {
@@ -92,15 +159,35 @@
 				9B9C6B0625ECD139008FC649 /* Sources */,
 				9B9C6B0725ECD139008FC649 /* Frameworks */,
 				9B9C6B0825ECD139008FC649 /* Resources */,
+				9B9C6B6425ECDE54008FC649 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9B9C6B6125ECDE54008FC649 /* PBXTargetDependency */,
 			);
 			name = YZBGRAShow;
 			productName = YZBGRAShow;
 			productReference = 9B9C6B0A25ECD139008FC649 /* YZBGRAShow.app */;
 			productType = "com.apple.product-type.application";
+		};
+		9B9C6B5A25ECDE54008FC649 /* YZVideoKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B9C6B6725ECDE54008FC649 /* Build configuration list for PBXNativeTarget "YZVideoKit" */;
+			buildPhases = (
+				9B9C6B5625ECDE54008FC649 /* Headers */,
+				9B9C6B5725ECDE54008FC649 /* Sources */,
+				9B9C6B5825ECDE54008FC649 /* Frameworks */,
+				9B9C6B5925ECDE54008FC649 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YZVideoKit;
+			productName = YZVideoKit;
+			productReference = 9B9C6B5B25ECDE54008FC649 /* YZVideoKit.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -111,6 +198,9 @@
 				LastUpgradeCheck = 1230;
 				TargetAttributes = {
 					9B9C6B0925ECD139008FC649 = {
+						CreatedOnToolsVersion = 12.3;
+					};
+					9B9C6B5A25ECDE54008FC649 = {
 						CreatedOnToolsVersion = 12.3;
 					};
 				};
@@ -129,6 +219,7 @@
 			projectRoot = "";
 			targets = (
 				9B9C6B0925ECD139008FC649 /* YZBGRAShow */,
+				9B9C6B5A25ECDE54008FC649 /* YZVideoKit */,
 			);
 		};
 /* End PBXProject section */
@@ -145,6 +236,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B9C6B5925ECDE54008FC649 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -158,7 +256,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B9C6B5725ECDE54008FC649 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B9C6B6C25ECDE65008FC649 /* YZVideoOutput.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9B9C6B6125ECDE54008FC649 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B9C6B5A25ECDE54008FC649 /* YZVideoKit */;
+			targetProxy = 9B9C6B6025ECDE54008FC649 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		9B9C6B1625ECD139008FC649 /* Main.storyboard */ = {
@@ -342,6 +456,60 @@
 			};
 			name = Release;
 		};
+		9B9C6B6525ECDE54008FC649 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 7XP66VHL84;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = YZVideoKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = yanzhen.YZVideoKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		9B9C6B6625ECDE54008FC649 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 7XP66VHL84;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = YZVideoKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = yanzhen.YZVideoKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -359,6 +527,15 @@
 			buildConfigurations = (
 				9B9C6B2425ECD13B008FC649 /* Debug */,
 				9B9C6B2525ECD13B008FC649 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9B9C6B6725ECDE54008FC649 /* Build configuration list for PBXNativeTarget "YZVideoKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B9C6B6525ECDE54008FC649 /* Debug */,
+				9B9C6B6625ECDE54008FC649 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
