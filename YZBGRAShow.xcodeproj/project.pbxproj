@@ -28,6 +28,10 @@
 		9B9C6B8825ECE629008FC649 /* YZPixelBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6B8625ECE629008FC649 /* YZPixelBuffer.m */; };
 		9B9C6B8D25ECE6BB008FC649 /* YZCropFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B9C6B8B25ECE6BB008FC649 /* YZCropFilter.h */; };
 		9B9C6B8E25ECE6BB008FC649 /* YZCropFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6B8C25ECE6BB008FC649 /* YZCropFilter.m */; };
+		9B9C6B9525ECEFD1008FC649 /* YZVertexFragment.metal in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6B9425ECEFD1008FC649 /* YZVertexFragment.metal */; };
+		9B9C6B9825ECEFDE008FC649 /* YZYUVToRGBConversion.metal in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6B9725ECEFDE008FC649 /* YZYUVToRGBConversion.metal */; };
+		9B9C6BA225ECF431008FC649 /* YZMetalOrientation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B9C6BA025ECF431008FC649 /* YZMetalOrientation.h */; };
+		9B9C6BA325ECF431008FC649 /* YZMetalOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6BA125ECF431008FC649 /* YZMetalOrientation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +85,10 @@
 		9B9C6B8625ECE629008FC649 /* YZPixelBuffer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZPixelBuffer.m; sourceTree = "<group>"; };
 		9B9C6B8B25ECE6BB008FC649 /* YZCropFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZCropFilter.h; sourceTree = "<group>"; };
 		9B9C6B8C25ECE6BB008FC649 /* YZCropFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZCropFilter.m; sourceTree = "<group>"; };
+		9B9C6B9425ECEFD1008FC649 /* YZVertexFragment.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = YZVertexFragment.metal; sourceTree = "<group>"; };
+		9B9C6B9725ECEFDE008FC649 /* YZYUVToRGBConversion.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = YZYUVToRGBConversion.metal; sourceTree = "<group>"; };
+		9B9C6BA025ECF431008FC649 /* YZMetalOrientation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZMetalOrientation.h; sourceTree = "<group>"; };
+		9B9C6BA125ECF431008FC649 /* YZMetalOrientation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZMetalOrientation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,9 +163,10 @@
 				9B9C6B6A25ECDE65008FC649 /* YZVideoOutput.m */,
 				9B9C6B7725ECE14D008FC649 /* YZVideoData.h */,
 				9B9C6B7825ECE14D008FC649 /* YZVideoData.m */,
-				9B9C6B8425ECE616008FC649 /* Output */,
 				9B9C6B8325ECE60A008FC649 /* Filter */,
+				9B9C6B8425ECE616008FC649 /* Output */,
 				9B9C6B7025ECE029008FC649 /* Base */,
+				9B9C6B9225ECEFA1008FC649 /* Metal */,
 				9B9C6B5E25ECDE54008FC649 /* Info.plist */,
 			);
 			path = YZVideoKit;
@@ -168,6 +177,8 @@
 			children = (
 				9B9C6B7125ECE044008FC649 /* YZMetalDevice.h */,
 				9B9C6B7225ECE044008FC649 /* YZMetalDevice.m */,
+				9B9C6BA025ECF431008FC649 /* YZMetalOrientation.h */,
+				9B9C6BA125ECF431008FC649 /* YZMetalOrientation.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -190,6 +201,15 @@
 			path = Output;
 			sourceTree = "<group>";
 		};
+		9B9C6B9225ECEFA1008FC649 /* Metal */ = {
+			isa = PBXGroup;
+			children = (
+				9B9C6B9425ECEFD1008FC649 /* YZVertexFragment.metal */,
+				9B9C6B9725ECEFDE008FC649 /* YZYUVToRGBConversion.metal */,
+			);
+			path = Metal;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -203,6 +223,7 @@
 				9B9C6B7925ECE14D008FC649 /* YZVideoData.h in Headers */,
 				9B9C6B7325ECE044008FC649 /* YZMetalDevice.h in Headers */,
 				9B9C6B8725ECE629008FC649 /* YZPixelBuffer.h in Headers */,
+				9B9C6BA225ECF431008FC649 /* YZMetalOrientation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,7 +340,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B9C6B7425ECE044008FC649 /* YZMetalDevice.m in Sources */,
+				9B9C6BA325ECF431008FC649 /* YZMetalOrientation.m in Sources */,
+				9B9C6B9825ECEFDE008FC649 /* YZYUVToRGBConversion.metal in Sources */,
 				9B9C6B8825ECE629008FC649 /* YZPixelBuffer.m in Sources */,
+				9B9C6B9525ECEFD1008FC649 /* YZVertexFragment.metal in Sources */,
 				9B9C6B7A25ECE14D008FC649 /* YZVideoData.m in Sources */,
 				9B9C6B8E25ECE6BB008FC649 /* YZCropFilter.m in Sources */,
 				9B9C6B6C25ECDE65008FC649 /* YZVideoOutput.m in Sources */,
@@ -530,6 +554,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = YZVideoKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -539,6 +564,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = yanzhen.YZVideoKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -557,6 +583,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = YZVideoKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -566,6 +593,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = yanzhen.YZVideoKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
