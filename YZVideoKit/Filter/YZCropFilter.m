@@ -20,6 +20,7 @@
 
 @property (nonatomic, strong) YZPixelBuffer *pixelBuffer;
 @property (nonatomic, strong) YZBGRAPixelBuffer *bgraBuffer;
+@property (nonatomic, strong) YZYUVPixelBuffer *yuvBuffer;
 @end
 
 @implementation YZCropFilter
@@ -38,6 +39,14 @@
         [_bgraBuffer setOutputPixelBuffer:_pixelBuffer];
     }
     return _bgraBuffer;
+}
+
+- (YZYUVPixelBuffer *)yuvBuffer {
+    if (!_yuvBuffer) {
+        _yuvBuffer = [[YZYUVPixelBuffer alloc] init];
+        [_yuvBuffer setOutputPixelBuffer:_pixelBuffer];
+    }
+    return _yuvBuffer;
 }
 
 - (instancetype)init
@@ -72,11 +81,18 @@
         }
     } else if (type == kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange) {
         if (videoData.rotation == 0) {
-            //NSLog(@"todo");
+            [self.yuvBuffer inputVideoRange:videoData];
         } else {
-            
+            [self.yuvBuffer inputVideoRange:videoData];
         }
     }
+//    else if (type == kCVPixelFormatType_420YpCbCr8BiPlanarFullRange) {
+//        if (videoData.rotation == 0) {
+//            [self.yuvBuffer inputVideoRange:videoData];
+//        } else {
+//            [self.yuvBuffer inputVideoRange:videoData];
+//        }
+//    }
 }
 
 

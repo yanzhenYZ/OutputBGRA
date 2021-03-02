@@ -7,8 +7,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class YZVideoData;
+@class YZPixelBuffer;
 @interface YZYUVPixelBuffer : NSObject
 
+- (void)inputVideoRange:(YZVideoData *)videoData;
+
+- (void)setOutputPixelBuffer:(YZPixelBuffer *)pixelBuffer;
 @end
 
 
