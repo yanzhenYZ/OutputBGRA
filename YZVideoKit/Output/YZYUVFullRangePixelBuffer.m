@@ -1,18 +1,18 @@
 //
-//  YZYUVVideoRangePixelBuffer.m
+//  YZYUVFullRangePixelBuffer.m
 //  YZVideoKit
 //
 //  Created by yanzhen on 2021/3/2.
 //
 
-#import "YZYUVVideoRangePixelBuffer.h"
+#import "YZYUVFullRangePixelBuffer.h"
 #import <MetalKit/MetalKit.h>
 #import "YZMetalOrientation.h"
 #import "YZPixelBuffer.h"
 #import "YZMetalDevice.h"
 #import "YZVideoData.h"
 
-@interface YZYUVVideoRangePixelBuffer ()
+@interface YZYUVFullRangePixelBuffer ()
 @property (nonatomic, strong) id<MTLRenderPipelineState> pipelineState;
 @property (nonatomic, assign) CVMetalTextureCacheRef textureCache;
 @property (nonatomic, strong) id<MTLTexture> texture;
@@ -21,7 +21,7 @@
 @property (nonatomic, strong) YZPixelBuffer *buffer;
 @end
 
-@implementation YZYUVVideoRangePixelBuffer {
+@implementation YZYUVFullRangePixelBuffer {
     CVPixelBufferRef _pixelBuffer;
     const float *_colorConversion; //4x3
 }
@@ -45,7 +45,7 @@
     self = [super init];
     if (self) {
         CVMetalTextureCacheCreate(NULL, NULL, YZMetalDevice.defaultDevice.device, NULL, &_textureCache);
-        _pipelineState = [YZMetalDevice.defaultDevice newRenderPipeline:@"YZYUVToRGBVertex" fragment:@"YZYUVConversionVideoRangeFragment"];
+        _pipelineState = [YZMetalDevice.defaultDevice newRenderPipeline:@"YZYUVToRGBVertex" fragment:@"YZYUVConversionFullRangeFragment"];//fullRange
     }
     return self;
 }
@@ -89,14 +89,14 @@
     height = CVPixelBufferGetHeight(pixelBuffer);
     width = CVPixelBufferGetWidth(pixelBuffer);
     CFTypeRef attachment = CVBufferGetAttachment(pixelBuffer, kCVImageBufferYCbCrMatrixKey, NULL);
-    if (attachment != NULL) {
+    if (attachment != NULL) {//fullRange
         if(CFStringCompare(attachment, kCVImageBufferYCbCrMatrix_ITU_R_601_4, 0) == kCFCompareEqualTo) {
-            _colorConversion = kYZColorConversion601;
+            _colorConversion = kYZColorConversion601FullRange;
         } else {
             _colorConversion = kYZColorConversion709;
         }
     } else {
-        _colorConversion = kYZColorConversion601;
+        _colorConversion = kYZColorConversion601FullRange;
     }
     
     [self convertYUVToRGB:textureY textureUV:textureUV rotation:videoData.rotation];
@@ -107,7 +107,7 @@
     id<MTLCommandBuffer> commandBuffer = [YZMetalDevice.defaultDevice commandBuffer];
     id<MTLRenderCommandEncoder> encoder = [commandBuffer renderCommandEncoderWithDescriptor:desc];
     if (!encoder) {
-        NSLog(@"YZYUVVideoRangePixelBuffer render endcoder Fail");
+        NSLog(@"YZYUVFullRangePixelBuffer render endcoder Fail");
         return;
     }
     [encoder setFrontFacingWinding:MTLWindingCounterClockwise];
@@ -153,7 +153,7 @@
                                             (__bridge CFDictionaryRef)(pixelAttributes),
                                             &_pixelBuffer);
     if (result != kCVReturnSuccess) {
-        NSLog(@"YZYUVVideoRangePixelBuffer to create cvpixelbuffer %d", result);
+        NSLog(@"YZYUVFullRangePixelBuffer to create cvpixelbuffer %d", result);
         return;
     }
     
@@ -167,4 +167,3 @@
     textureRef = NULL;
 }
 @end
-

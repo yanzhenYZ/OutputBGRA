@@ -82,6 +82,7 @@
     _dataOutput = [[AVCaptureVideoDataOutput alloc] init];
     _dataOutput.alwaysDiscardsLateVideoFrames = YES;
     //kCVPixelFormatType_420YpCbCr8BiPlanarFullRange
+    //kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange
     _dataOutput.videoSettings = [NSDictionary dictionaryWithObject:[NSNumber numberWithUnsignedInt:kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange] forKey:(NSString *)kCVPixelBufferPixelFormatTypeKey];
     _dataOutputQueue = dispatch_queue_create("yz.video.queue", 0);
     [self.dataOutput setSampleBufferDelegate:self queue:self.dataOutputQueue];

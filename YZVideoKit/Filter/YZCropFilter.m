@@ -13,6 +13,7 @@
 #import "YZMetalOrientation.h"
 #import "YZBGRAPixelBuffer.h"
 #import "YZYUVVideoRangePixelBuffer.h"
+#import "YZYUVFullRangePixelBuffer.h"
 
 @interface YZCropFilter ()
 @property (nonatomic, assign) CVMetalTextureCacheRef textureCache;
@@ -20,7 +21,8 @@
 
 @property (nonatomic, strong) YZPixelBuffer *pixelBuffer;
 @property (nonatomic, strong) YZBGRAPixelBuffer *bgraBuffer;
-@property (nonatomic, strong) YZYUVVideoRangePixelBuffer *yuvBuffer;
+@property (nonatomic, strong) YZYUVVideoRangePixelBuffer *videoRangeBuffer;
+@property (nonatomic, strong) YZYUVFullRangePixelBuffer *fullRangeBuffer;
 @end
 
 @implementation YZCropFilter
@@ -41,12 +43,20 @@
     return _bgraBuffer;
 }
 
-- (YZYUVVideoRangePixelBuffer *)yuvBuffer {
-    if (!_yuvBuffer) {
-        _yuvBuffer = [[YZYUVVideoRangePixelBuffer alloc] init];
-        [_yuvBuffer setOutputPixelBuffer:_pixelBuffer];
+- (YZYUVVideoRangePixelBuffer *)videoRangeBuffer {
+    if (!_videoRangeBuffer) {
+        _videoRangeBuffer = [[YZYUVVideoRangePixelBuffer alloc] init];
+        [_videoRangeBuffer setOutputPixelBuffer:_pixelBuffer];
     }
-    return _yuvBuffer;
+    return _videoRangeBuffer;
+}
+
+- (YZYUVFullRangePixelBuffer *)fullRangeBuffer {
+    if (!_fullRangeBuffer) {
+        _fullRangeBuffer = [[YZYUVFullRangePixelBuffer alloc] init];
+        [_fullRangeBuffer setOutputPixelBuffer:_pixelBuffer];
+    }
+    return _fullRangeBuffer;
 }
 
 - (instancetype)init
@@ -80,69 +90,10 @@
             [self.bgraBuffer inputVideo:videoData];
         }
     } else if (type == kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange) {
-        [self.yuvBuffer inputVideoData:videoData];
+        [self.videoRangeBuffer inputVideoData:videoData];
+    } else if (type == kCVPixelFormatType_420YpCbCr8BiPlanarFullRange) {
+        [self.fullRangeBuffer inputVideoData:videoData];
     }
-//    else if (type == kCVPixelFormatType_420YpCbCr8BiPlanarFullRange) {
-//        if (videoData.rotation == 0) {
-//            [self.yuvBuffer inputVideoRange:videoData];
-//        } else {
-//            [self.yuvBuffer inputVideoRange:videoData];
-//        }
-//    }
 }
 
-
-
-
-
-//no use
-- (void)rotation32BGRA:(CVPixelBufferRef)pixelBuffer rotation:(int)rotation {
-    int width = (int)CVPixelBufferGetWidth(pixelBuffer);
-    int height = (int)CVPixelBufferGetHeight(pixelBuffer);
-    CVMetalTextureRef tmpTexture = NULL;
-    CVReturn status =  CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, self.textureCache, pixelBuffer, NULL, MTLPixelFormatBGRA8Unorm, width, height, 0, &tmpTexture);
-    if (status != kCVReturnSuccess) {
-        return;
-    }
-    
-    id<MTLTexture> texture = CVMetalTextureGetTexture(tmpTexture);
-    CFRelease(tmpTexture);
-
-    NSUInteger outputW = width;
-    NSUInteger outputH = height;
-    if (rotation == 90 || rotation == 270) {
-        outputW = height;
-        outputH = width;
-    }
-    
-    //output texture
-    MTLTextureDescriptor *textureDesc = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatBGRA8Unorm width:outputW height:outputH mipmapped:NO];
-    textureDesc.usage = MTLTextureUsageShaderRead | MTLTextureUsageShaderWrite | MTLTextureUsageRenderTarget;
-    id<MTLTexture> outputTexture = [YZMetalDevice.defaultDevice.device newTextureWithDescriptor:textureDesc];
-    
-    MTLRenderPassDescriptor *desc = [YZMetalDevice newRenderPassDescriptor:outputTexture];
-    id<MTLCommandBuffer> commandBuffer = [YZMetalDevice.defaultDevice commandBuffer];
-    id<MTLRenderCommandEncoder> encoder = [commandBuffer renderCommandEncoderWithDescriptor:desc];
-    if (!encoder) {
-        NSLog(@"YZCropFilter render endcoder Fail");
-        return;
-    }
-    
-    [encoder setFrontFacingWinding:MTLWindingCounterClockwise];
-    [encoder setRenderPipelineState:self.pipelineState];
-    simd_float8 vertices = [YZMetalOrientation defaultVertices];
-    [encoder setVertexBytes:&vertices length:sizeof(simd_float8) atIndex:0];
-    
-    simd_float8 textureCoordinates = [YZMetalOrientation getRotationTextureCoordinates:rotation];
-   
-    [encoder setVertexBytes:&textureCoordinates length:sizeof(simd_float8) atIndex:1];
-    [encoder setFragmentTexture:texture atIndex:0];
-    
-    [encoder drawPrimitives:MTLPrimitiveTypeTriangleStrip vertexStart:0 vertexCount:4];
-    [encoder endEncoding];
-    
-    [commandBuffer commit];
-    
-    [_pixelBuffer newTextureAvailable:outputTexture];
-}
 @end
