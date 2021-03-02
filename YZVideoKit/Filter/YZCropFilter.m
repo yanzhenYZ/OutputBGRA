@@ -12,6 +12,7 @@
 #import "YZMetalDevice.h"
 #import "YZMetalOrientation.h"
 #import "YZBGRAPixelBuffer.h"
+#import "YZYUVPixelBuffer.h"
 
 @interface YZCropFilter ()
 @property (nonatomic, assign) CVMetalTextureCacheRef textureCache;
@@ -71,7 +72,7 @@
         }
     } else if (type == kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange) {
         if (videoData.rotation == 0) {
-            
+            //NSLog(@"todo");
         } else {
             
         }

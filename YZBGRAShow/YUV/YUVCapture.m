@@ -1,14 +1,14 @@
 //
-//  VideoBGRACapture.m
+//  YUVCapture.m
 //  YZBGRAShow
 //
-//  Created by yanzhen on 2021/3/1.
+//  Created by yanzhen on 2021/3/2.
 //
 
-#import "VideoBGRACapture.h"
+#import "YUVCapture.h"
 #import <AVFoundation/AVFoundation.h>
 
-@interface VideoBGRACapture ()<AVCaptureVideoDataOutputSampleBufferDelegate>
+@interface YUVCapture ()<AVCaptureVideoDataOutputSampleBufferDelegate>
 @property (nonatomic, strong) UIView *player;
 
 @property (nonatomic, strong) AVCaptureSession *session;
@@ -18,11 +18,11 @@
 @property (nonatomic, strong) AVCaptureConnection *connect;
 @end
 
-@implementation VideoBGRACapture
+@implementation YUVCapture
 - (void)dealloc
 {
     [NSNotificationCenter.defaultCenter removeObserver:self];
-    NSLog(@"VideoBGRACapture---dealloc");
+    NSLog(@"YUVCapture---dealloc");
 }
 
 - (instancetype)initWithPlayer:(UIView *)player {
@@ -81,7 +81,8 @@
     
     _dataOutput = [[AVCaptureVideoDataOutput alloc] init];
     _dataOutput.alwaysDiscardsLateVideoFrames = YES;
-    _dataOutput.videoSettings = [NSDictionary dictionaryWithObject:[NSNumber numberWithUnsignedInt:kCVPixelFormatType_32BGRA] forKey:(NSString *)kCVPixelBufferPixelFormatTypeKey];
+    //kCVPixelFormatType_420YpCbCr8BiPlanarFullRange
+    _dataOutput.videoSettings = [NSDictionary dictionaryWithObject:[NSNumber numberWithUnsignedInt:kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange] forKey:(NSString *)kCVPixelBufferPixelFormatTypeKey];
     _dataOutputQueue = dispatch_queue_create("yz.video.queue", 0);
     [self.dataOutput setSampleBufferDelegate:self queue:self.dataOutputQueue];
     if ([self.session canAddInput:self.deviceInput]) {
@@ -98,7 +99,7 @@
     
     self.session.sessionPreset = AVCaptureSessionPreset640x480;
 #pragma mark - ROTATION__TEST && RRR11
-#if 0
+#if 1
     [_session beginConfiguration];
     _connect = [self.dataOutput connectionWithMediaType:AVMediaTypeVideo];
     [_connect setVideoOrientation:AVCaptureVideoOrientationPortrait];

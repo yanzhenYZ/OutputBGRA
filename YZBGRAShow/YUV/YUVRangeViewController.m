@@ -1,55 +1,53 @@
 //
-//  BGRAViewController.m
+//  YUVRangeViewController.m
 //  YZBGRAShow
 //
-//  Created by yanzhen on 2021/3/1.
+//  Created by yanzhen on 2021/3/2.
 //
 
-#import "BGRAViewController.h"
+#import "YUVRangeViewController.h"
 #import <YZVideoKit/YZVideoKit.h>
-#import "VideoBGRACapture.h"
+#import "YUVCapture.h"
 
-@interface BGRAViewController ()<VideoBGRACaptureDelegate, YZVideoOutputDelegate>
+@interface YUVRangeViewController ()<YZVideoOutputDelegate, YUVCaptureDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *mainPlayer;
 @property (weak, nonatomic) IBOutlet UIImageView *showPlayer;
 
-@property (nonatomic, strong) VideoBGRACapture *capture;
+@property (nonatomic, strong) YUVCapture *capture;
 @property (nonatomic, strong) YZVideoOutput *videoOutput;
 
 @property (nonatomic, strong) CIContext *context;
 @end
 
-@implementation BGRAViewController
+@implementation YUVRangeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     _context = [CIContext contextWithOptions:nil];
     
     _videoOutput = [[YZVideoOutput alloc] init];
     _videoOutput.delegate = self;
     
-    _capture = [[VideoBGRACapture alloc] initWithPlayer:_mainPlayer];
+    _capture = [[YUVCapture alloc] initWithPlayer:_mainPlayer];
     _capture.delegate = self;
     [_capture startRunning];
+}
+
+#pragma mark - YUVCaptureDelegate
+- (void)capture:(YUVCapture *)capture pixelBuffer:(CVPixelBufferRef)pixelBuffer {
+    YZVideoData *data = [[YZVideoData alloc] init];
+    data.pixelBuffer = pixelBuffer;
+#pragma mark - ROTATION__TEST && RRR11
+#if 0//不设置AVCaptureConnection视频方向需要设置
+    data.rotation = [self getOutputRotation];
+#endif
+    [_videoOutput inputVideo:data];
 }
 
 #pragma mark - YZVideoOutputDelegate
 - (void)video:(YZVideoOutput *)video pixelBuffer:(CVPixelBufferRef)pixelBuffer {
     [self showPixelBuffer:pixelBuffer];
-}
-
-#pragma mark - VideoBGRACaptureDelegate
-- (void)capture:(VideoBGRACapture *)capture pixelBuffer:(CVPixelBufferRef)pixelBuffer {
-    YZVideoData *data = [[YZVideoData alloc] init];
-    data.pixelBuffer = pixelBuffer;
-#pragma mark - ROTATION__TEST && RRR11
-#if 1//不设置AVCaptureConnection视频方向需要设置
-    data.rotation = [self getOutputRotation];
-#endif
-    [_videoOutput inputVideo:data];
-
 }
 
 #pragma mark - helper
@@ -89,8 +87,9 @@
     return ratation;
     
 }
-#pragma mark - UI
-- (IBAction)exitVideo:(UIButton *)sender {
+
+#pragma mark - ui
+- (IBAction)exitCapture:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
