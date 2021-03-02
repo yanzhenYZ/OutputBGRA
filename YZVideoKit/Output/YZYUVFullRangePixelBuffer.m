@@ -6,7 +6,6 @@
 //
 
 #import "YZYUVFullRangePixelBuffer.h"
-#import <MetalKit/MetalKit.h>
 #import "YZMetalOrientation.h"
 #import "YZMetalDevice.h"
 #import "YZVideoData.h"

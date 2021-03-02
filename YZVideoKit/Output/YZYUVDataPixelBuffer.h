@@ -5,15 +5,9 @@
 //  Created by yanzhen on 2021/3/2.
 //
 
-#import <Foundation/Foundation.h>
+#import "YZSuperPixelBuffer.h"
 
-@class YZVideoData;
-@class YZPixelBuffer;
-@interface YZYUVDataPixelBuffer : NSObject
-
-- (void)inputVideoData:(YZVideoData *)videoData;
-
-- (void)setOutputPixelBuffer:(YZPixelBuffer *)pixelBuffer;
+@interface YZYUVDataPixelBuffer : YZSuperPixelBuffer
 
 @end
 

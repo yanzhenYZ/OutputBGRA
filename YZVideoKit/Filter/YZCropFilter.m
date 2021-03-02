@@ -17,9 +17,6 @@
 #import "YZYUVDataPixelBuffer.h"
 
 @interface YZCropFilter ()
-@property (nonatomic, assign) CVMetalTextureCacheRef textureCache;
-@property (nonatomic, strong) id<MTLRenderPipelineState> pipelineState;
-
 @property (nonatomic, strong) YZPixelBuffer *pixelBuffer;
 @property (nonatomic, strong) YZBGRAPixelBuffer *bgraBuffer;
 @property (nonatomic, strong) YZYUVVideoRangePixelBuffer *videoRangeBuffer;
@@ -28,15 +25,35 @@
 @end
 
 @implementation YZCropFilter
-- (void)dealloc
-{
-    if (_textureCache) {
-        CVMetalTextureCacheFlush(_textureCache, 0);
-        CFRelease(_textureCache);
-        _textureCache = nil;
+
+- (void)setOutputPixelBuffer:(YZPixelBuffer *)pixelBuffer {
+    _pixelBuffer = pixelBuffer;
+}
+
+- (void)inputVideo:(YZVideoData *)videoData {
+    if (videoData.pixelBuffer) {
+        [self dealPixelBuffer:videoData];
+    } else {
+        [self.dataBuffer inputVideo:videoData];
+    }
+}
+#pragma mark - helper
+- (void)dealPixelBuffer:(YZVideoData *)videoData {
+    OSType type = CVPixelBufferGetPixelFormatType(videoData.pixelBuffer);
+    if (type == kCVPixelFormatType_32BGRA) {
+        if (videoData.rotation == 0) {
+            [_pixelBuffer outoutPixelBuffer:videoData.pixelBuffer videoData:videoData];
+        } else {
+            [self.bgraBuffer inputVideo:videoData];
+        }
+    } else if (type == kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange) {
+        [self.videoRangeBuffer inputVideo:videoData];
+    } else if (type == kCVPixelFormatType_420YpCbCr8BiPlanarFullRange) {
+        [self.fullRangeBuffer inputVideo:videoData];
     }
 }
 
+#pragma mark - lazy var
 - (YZBGRAPixelBuffer *)bgraBuffer {
     if (!_bgraBuffer) {
         _bgraBuffer = [[YZBGRAPixelBuffer alloc] init];
@@ -68,42 +85,4 @@
     }
     return _dataBuffer;
 }
-
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        CVMetalTextureCacheCreate(NULL, NULL, YZMetalDevice.defaultDevice.device, NULL, &_textureCache);
-        _pipelineState = [YZMetalDevice.defaultDevice newRenderPipeline:@"YZInputVertex" fragment:@"YZFragment"];
-    }
-    return self;
-}
-
-- (void)setOutputPixelBuffer:(YZPixelBuffer *)pixelBuffer {
-    _pixelBuffer = pixelBuffer;
-}
-
-- (void)inputVideo:(YZVideoData *)videoData {
-    if (videoData.pixelBuffer) {
-        [self dealPixelBuffer:videoData];
-    } else {
-        [self.dataBuffer inputVideoData:videoData];
-    }
-}
-#pragma mark - helper
-- (void)dealPixelBuffer:(YZVideoData *)videoData {
-    OSType type = CVPixelBufferGetPixelFormatType(videoData.pixelBuffer);
-    if (type == kCVPixelFormatType_32BGRA) {
-        if (videoData.rotation == 0) {
-            [_pixelBuffer outoutPixelBuffer:videoData.pixelBuffer videoData:videoData];
-        } else {
-            [self.bgraBuffer inputVideo:videoData];
-        }
-    } else if (type == kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange) {
-        [self.videoRangeBuffer inputVideoData:videoData];
-    } else if (type == kCVPixelFormatType_420YpCbCr8BiPlanarFullRange) {
-        [self.fullRangeBuffer inputVideo:videoData];
-    }
-}
-
 @end

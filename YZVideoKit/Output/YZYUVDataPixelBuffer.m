@@ -6,54 +6,23 @@
 //
 
 #import "YZYUVDataPixelBuffer.h"
-#import <MetalKit/MetalKit.h>
 #import "YZMetalOrientation.h"
-#import "YZPixelBuffer.h"
 #import "YZMetalDevice.h"
 #import "YZVideoData.h"
 
-@interface YZYUVDataPixelBuffer ()
-@property (nonatomic, strong) id<MTLRenderPipelineState> pipelineState;
-@property (nonatomic, assign) CVMetalTextureCacheRef textureCache;
-@property (nonatomic, strong) id<MTLTexture> texture;
-@property (nonatomic) CGSize size;
-
-@property (nonatomic, strong) YZPixelBuffer *buffer;
-@end
-
-@implementation YZYUVDataPixelBuffer {
-    CVPixelBufferRef _pixelBuffer;
-}
-
-- (void)dealloc
-{
-    if (_pixelBuffer) {
-        CVPixelBufferRelease(_pixelBuffer);
-        _pixelBuffer = nil;
-    }
-    
-    if (_textureCache) {
-        CVMetalTextureCacheFlush(_textureCache, 0);
-        CFRelease(_textureCache);
-        _textureCache = nil;
-    }
-}
+@implementation YZYUVDataPixelBuffer
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        CVMetalTextureCacheCreate(NULL, NULL, YZMetalDevice.defaultDevice.device, NULL, &_textureCache);
-        _pipelineState = [YZMetalDevice.defaultDevice newRenderPipeline:@"YZYUVDataToRGBVertex" fragment:@"YZYUVDataConversionFullRangeFragment"];
+        self.pipelineState = [YZMetalDevice.defaultDevice newRenderPipeline:@"YZYUVDataToRGBVertex" fragment:@"YZYUVDataConversionFullRangeFragment"];
     }
     return self;
 }
 
-- (void)setOutputPixelBuffer:(YZPixelBuffer *)pixelBuffer {
-    _buffer = pixelBuffer;
-}
 //CPU 3%
-- (void)inputVideoData:(YZVideoData *)videoData {
+- (void)inputVideo:(YZVideoData *)videoData {
     int width = videoData.width;
     int height = videoData.height;
     if (videoData.rotation == 90 || videoData.rotation == 270) {
@@ -61,7 +30,7 @@
     } else {
         [self newDealTextureSize:CGSizeMake(width, height)];
     }
-    if (!_pixelBuffer || !_texture) { return; }
+    if (![self continueMetal]) {  return; }
     
     MTLTextureDescriptor *yDesc = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatR8Unorm width:width height:height mipmapped:NO];
     yDesc.usage = MTLTextureUsageShaderWrite | MTLTextureUsageRenderTarget | MTLTextureUsageShaderRead;
@@ -79,15 +48,15 @@
     [textureV replaceRegion:MTLRegionMake2D(0, 0, textureV.width, textureV.height) mipmapLevel:0 withBytes:videoData.vBuffer bytesPerRow:videoData.vStride];
     
     [self convertYUVToRGB:textureY textureU:textureU textureV:textureV rotation:videoData.rotation];
-    [self.buffer outoutPixelBuffer:_pixelBuffer videoData:videoData];
+    [self outoutVideoData:videoData];
 }
 
 - (void)convertYUVToRGB:(id<MTLTexture>)textureY textureU:(id<MTLTexture>)textureU textureV:(id<MTLTexture>)textureV rotation:(int)rotation {
-    MTLRenderPassDescriptor *desc = [YZMetalDevice newRenderPassDescriptor:_texture];
+    MTLRenderPassDescriptor *desc = [YZMetalDevice newRenderPassDescriptor:self.texture];
     id<MTLCommandBuffer> commandBuffer = [YZMetalDevice.defaultDevice commandBuffer];
     id<MTLRenderCommandEncoder> encoder = [commandBuffer renderCommandEncoderWithDescriptor:desc];
     if (!encoder) {
-        NSLog(@"YZYUVFullRangePixelBuffer render endcoder Fail");
+        NSLog(@"YZYUVDataPixelBuffer render endcoder Fail");
         return;
     }
     [encoder setFrontFacingWinding:MTLWindingCounterClockwise];
@@ -111,37 +80,5 @@
     [commandBuffer waitUntilCompleted];
 }
 
-#pragma mark - helper
-- (void)newDealTextureSize:(CGSize)size {
-    if (!CGSizeEqualToSize(_size, size)) {
-        if (_pixelBuffer) {
-            CVPixelBufferRelease(_pixelBuffer);
-            _pixelBuffer = nil;
-        }
-        _size = size;
-    }
-    
-    if (_pixelBuffer) { return; }
-    NSDictionary *pixelAttributes = @{(NSString *)kCVPixelBufferIOSurfacePropertiesKey:@{}};
-    CVReturn result = CVPixelBufferCreate(kCFAllocatorDefault,
-                                            _size.width,
-                                            _size.height,
-                                            kCVPixelFormatType_32BGRA,
-                                            (__bridge CFDictionaryRef)(pixelAttributes),
-                                            &_pixelBuffer);
-    if (result != kCVReturnSuccess) {
-        NSLog(@"YZYUVDataPixelBuffer to create cvpixelbuffer %d", result);
-        return;
-    }
-    
-    CVMetalTextureRef textureRef = NULL;
-    CVReturn status = CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, _textureCache, _pixelBuffer, nil, MTLPixelFormatBGRA8Unorm, size.width, size.height, 0, &textureRef);
-    if (kCVReturnSuccess != status) {
-        return;
-    }
-    _texture = CVMetalTextureGetTexture(textureRef);
-    CFRelease(textureRef);
-    textureRef = NULL;
-}
 @end
 
