@@ -104,7 +104,16 @@
     [commandBuffer commit];
     [commandBuffer waitUntilCompleted];
     
-    [self.buffer outoutPixelBuffer:_pixelBuffer];
+    [self outputPixelBuffer:videoData];
+}
+
+- (void)outputPixelBuffer:(YZVideoData *)data {
+    UIEdgeInsets edge = UIEdgeInsetsMake(data.cropTop, data.cropLeft, data.cropBottom, data.cropRight);
+    if (UIEdgeInsetsEqualToEdgeInsets(edge, UIEdgeInsetsZero)) {
+        [self.buffer outoutPixelBuffer:_pixelBuffer];
+        return;
+    }
+    //todo
 }
 
 #pragma mark - helper

@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 /**
  1.0.2 裁剪CVPixelBuffer
+  001:CVPixelBuffer裁剪
+  002:Metal裁剪
  1.0.3 branch 不支持Metal libyuv
  */
 int main(int argc, char * argv[]) {
