@@ -106,6 +106,7 @@
     data.vStride = uvWidth;
     data.vBuffer = vBuffer;
     
+    //data.rotation = [self getOutputRotation];
     [_videoOutput inputVideo:data];
     
     free(uBuffer);

@@ -46,6 +46,7 @@
 		9B9C6C1725EE14F0008FC649 /* YUVData.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B9C6C1525EE14F0008FC649 /* YUVData.storyboard */; };
 		9B9C6C1B25EE1E51008FC649 /* YZYUVDataPixelBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B9C6C1925EE1E51008FC649 /* YZYUVDataPixelBuffer.h */; };
 		9B9C6C1C25EE1E51008FC649 /* YZYUVDataPixelBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6C1A25EE1E51008FC649 /* YZYUVDataPixelBuffer.m */; };
+		9B9C6C2225EE239B008FC649 /* YZYUVDataToRGB.metal in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6C2125EE239B008FC649 /* YZYUVDataToRGB.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +122,7 @@
 		9B9C6C1625EE14F0008FC649 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/YUVData.storyboard; sourceTree = "<group>"; };
 		9B9C6C1925EE1E51008FC649 /* YZYUVDataPixelBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZYUVDataPixelBuffer.h; sourceTree = "<group>"; };
 		9B9C6C1A25EE1E51008FC649 /* YZYUVDataPixelBuffer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZYUVDataPixelBuffer.m; sourceTree = "<group>"; };
+		9B9C6C2125EE239B008FC649 /* YZYUVDataToRGB.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = YZYUVDataToRGB.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +252,7 @@
 			children = (
 				9B9C6B9425ECEFD1008FC649 /* YZVertexFragment.metal */,
 				9B9C6B9725ECEFDE008FC649 /* YZYUVToRGBConversion.metal */,
+				9B9C6C2125EE239B008FC649 /* YZYUVDataToRGB.metal */,
 			);
 			path = Metal;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 				9B9C6BD825EDE2D1008FC649 /* YZYUVVideoRangePixelBuffer.m in Sources */,
 				9B9C6BA325ECF431008FC649 /* YZMetalOrientation.m in Sources */,
 				9B9C6BA825ECF81C008FC649 /* YZBGRAPixelBuffer.m in Sources */,
+				9B9C6C2225EE239B008FC649 /* YZYUVDataToRGB.metal in Sources */,
 				9B9C6B9825ECEFDE008FC649 /* YZYUVToRGBConversion.metal in Sources */,
 				9B9C6BDE25EDE428008FC649 /* YZYUVFullRangePixelBuffer.m in Sources */,
 				9B9C6C1C25EE1E51008FC649 /* YZYUVDataPixelBuffer.m in Sources */,
