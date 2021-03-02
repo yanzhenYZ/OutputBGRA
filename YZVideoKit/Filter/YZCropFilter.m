@@ -12,7 +12,7 @@
 #import "YZMetalDevice.h"
 #import "YZMetalOrientation.h"
 #import "YZBGRAPixelBuffer.h"
-#import "YZYUVPixelBuffer.h"
+#import "YZYUVVideoRangePixelBuffer.h"
 
 @interface YZCropFilter ()
 @property (nonatomic, assign) CVMetalTextureCacheRef textureCache;
@@ -20,7 +20,7 @@
 
 @property (nonatomic, strong) YZPixelBuffer *pixelBuffer;
 @property (nonatomic, strong) YZBGRAPixelBuffer *bgraBuffer;
-@property (nonatomic, strong) YZYUVPixelBuffer *yuvBuffer;
+@property (nonatomic, strong) YZYUVVideoRangePixelBuffer *yuvBuffer;
 @end
 
 @implementation YZCropFilter
@@ -41,9 +41,9 @@
     return _bgraBuffer;
 }
 
-- (YZYUVPixelBuffer *)yuvBuffer {
+- (YZYUVVideoRangePixelBuffer *)yuvBuffer {
     if (!_yuvBuffer) {
-        _yuvBuffer = [[YZYUVPixelBuffer alloc] init];
+        _yuvBuffer = [[YZYUVVideoRangePixelBuffer alloc] init];
         [_yuvBuffer setOutputPixelBuffer:_pixelBuffer];
     }
     return _yuvBuffer;
@@ -80,11 +80,7 @@
             [self.bgraBuffer inputVideo:videoData];
         }
     } else if (type == kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange) {
-        if (videoData.rotation == 0) {
-            [self.yuvBuffer inputVideoRange:videoData];
-        } else {
-            [self.yuvBuffer inputVideoRange:videoData];
-        }
+        [self.yuvBuffer inputVideoData:videoData];
     }
 //    else if (type == kCVPixelFormatType_420YpCbCr8BiPlanarFullRange) {
 //        if (videoData.rotation == 0) {

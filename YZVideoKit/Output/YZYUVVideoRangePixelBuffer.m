@@ -1,18 +1,18 @@
 //
-//  YZYUVPixelBuffer.m
+//  YZYUVVideoRangePixelBuffer.m
 //  YZVideoKit
 //
 //  Created by yanzhen on 2021/3/2.
 //
 
-#import "YZYUVPixelBuffer.h"
+#import "YZYUVVideoRangePixelBuffer.h"
 #import <MetalKit/MetalKit.h>
 #import "YZMetalOrientation.h"
 #import "YZPixelBuffer.h"
 #import "YZMetalDevice.h"
 #import "YZVideoData.h"
 
-@interface YZYUVPixelBuffer ()
+@interface YZYUVVideoRangePixelBuffer ()
 @property (nonatomic, strong) id<MTLRenderPipelineState> pipelineState;
 @property (nonatomic, assign) CVMetalTextureCacheRef textureCache;
 @property (nonatomic, strong) id<MTLTexture> texture;
@@ -21,7 +21,7 @@
 @property (nonatomic, strong) YZPixelBuffer *buffer;
 @end
 
-@implementation YZYUVPixelBuffer {
+@implementation YZYUVVideoRangePixelBuffer {
     CVPixelBufferRef _pixelBuffer;
     const float *_colorConversion; //4x3
 }
@@ -54,14 +54,15 @@
     _buffer = pixelBuffer;
 }
 
-- (void)inputVideoRange:(YZVideoData *)videoData {
-    [self processYUVVideoSampleBuffer:videoData.pixelBuffer];
-}
-
-- (void)processYUVVideoSampleBuffer:(CVPixelBufferRef)pixelBuffer {
+- (void)inputVideoData:(YZVideoData *)videoData {
+    CVPixelBufferRef pixelBuffer = videoData.pixelBuffer;
     size_t width = CVPixelBufferGetWidthOfPlane(pixelBuffer, 0);
     size_t height = CVPixelBufferGetHeightOfPlane(pixelBuffer, 0);
-    [self newDealTextureSize:CGSizeMake(width, height)];
+    if (videoData.rotation == 90 || videoData.rotation == 270) {
+        [self newDealTextureSize:CGSizeMake(height, width)];
+    } else {
+        [self newDealTextureSize:CGSizeMake(width, height)];
+    }
     if (!_pixelBuffer || !_texture) { return; }
     
     CVMetalTextureRef textureRef = NULL;
@@ -98,10 +99,10 @@
         _colorConversion = kYZColorConversion601;
     }
     
-    [self convertYUVToRGB:textureY textureUV:textureUV];
+    [self convertYUVToRGB:textureY textureUV:textureUV rotation:videoData.rotation];
 }
 
-- (void)convertYUVToRGB:(id<MTLTexture>)textureY textureUV:(id<MTLTexture>)textureUV {
+- (void)convertYUVToRGB:(id<MTLTexture>)textureY textureUV:(id<MTLTexture>)textureUV rotation:(int)rotation {
     MTLRenderPassDescriptor *desc = [YZMetalDevice newRenderPassDescriptor:_texture];
     id<MTLCommandBuffer> commandBuffer = [YZMetalDevice.defaultDevice commandBuffer];
     id<MTLRenderCommandEncoder> encoder = [commandBuffer renderCommandEncoderWithDescriptor:desc];
@@ -115,7 +116,7 @@
     simd_float8 vertices = [YZMetalOrientation defaultVertices];
     [encoder setVertexBytes:&vertices length:sizeof(simd_float8) atIndex:0];
     
-    simd_float8 textureCoordinates = [YZMetalOrientation defaultTextureCoordinates];
+    simd_float8 textureCoordinates = [YZMetalOrientation getRotationTextureCoordinates:rotation];
     [encoder setVertexBytes:&textureCoordinates length:sizeof(simd_float8) atIndex:1];
     [encoder setFragmentTexture:textureY atIndex:0];
     [encoder setVertexBytes:&textureCoordinates length:sizeof(simd_float8) atIndex:2];
@@ -152,7 +153,7 @@
                                             (__bridge CFDictionaryRef)(pixelAttributes),
                                             &_pixelBuffer);
     if (result != kCVReturnSuccess) {
-        NSLog(@"YZNewPixelBuffer to create cvpixelbuffer %d", result);
+        NSLog(@"YZYUVPixelBuffer to create cvpixelbuffer %d", result);
         return;
     }
     
@@ -166,3 +167,4 @@
     textureRef = NULL;
 }
 @end
+

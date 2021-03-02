@@ -1,5 +1,5 @@
 //
-//  YZYUVPixelBuffer.h
+//  YZYUVVideoRangePixelBuffer.h
 //  YZVideoKit
 //
 //  Created by yanzhen on 2021/3/2.
@@ -9,11 +9,12 @@
 
 @class YZVideoData;
 @class YZPixelBuffer;
-@interface YZYUVPixelBuffer : NSObject
+@interface YZYUVVideoRangePixelBuffer : NSObject
 
-- (void)inputVideoRange:(YZVideoData *)videoData;
+- (void)inputVideoData:(YZVideoData *)videoData;
 
 - (void)setOutputPixelBuffer:(YZPixelBuffer *)pixelBuffer;
+
 @end
 
 

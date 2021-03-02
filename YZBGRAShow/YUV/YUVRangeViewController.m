@@ -39,7 +39,7 @@
     YZVideoData *data = [[YZVideoData alloc] init];
     data.pixelBuffer = pixelBuffer;
 #pragma mark - ROTATION__TEST && RRR11
-#if 0//不设置AVCaptureConnection视频方向需要设置
+#if 1//不设置AVCaptureConnection视频方向需要设置
     data.rotation = [self getOutputRotation];
 #endif
     [_videoOutput inputVideo:data];

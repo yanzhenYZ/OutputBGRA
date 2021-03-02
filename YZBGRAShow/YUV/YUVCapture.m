@@ -99,7 +99,7 @@
     
     self.session.sessionPreset = AVCaptureSessionPreset640x480;
 #pragma mark - ROTATION__TEST && RRR11
-#if 1
+#if 0
     [_session beginConfiguration];
     _connect = [self.dataOutput connectionWithMediaType:AVMediaTypeVideo];
     [_connect setVideoOrientation:AVCaptureVideoOrientationPortrait];
