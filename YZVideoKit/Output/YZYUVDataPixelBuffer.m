@@ -1,18 +1,18 @@
 //
-//  YZYUVFullRangePixelBuffer.m
+//  YZYUVDataPixelBuffer.m
 //  YZVideoKit
 //
 //  Created by yanzhen on 2021/3/2.
 //
 
-#import "YZYUVFullRangePixelBuffer.h"
+#import "YZYUVDataPixelBuffer.h"
 #import <MetalKit/MetalKit.h>
 #import "YZMetalOrientation.h"
 #import "YZPixelBuffer.h"
 #import "YZMetalDevice.h"
 #import "YZVideoData.h"
 
-@interface YZYUVFullRangePixelBuffer ()
+@interface YZYUVDataPixelBuffer ()
 @property (nonatomic, strong) id<MTLRenderPipelineState> pipelineState;
 @property (nonatomic, assign) CVMetalTextureCacheRef textureCache;
 @property (nonatomic, strong) id<MTLTexture> texture;
@@ -21,7 +21,7 @@
 @property (nonatomic, strong) YZPixelBuffer *buffer;
 @end
 
-@implementation YZYUVFullRangePixelBuffer {
+@implementation YZYUVDataPixelBuffer {
     CVPixelBufferRef _pixelBuffer;
     const float *_colorConversion; //4x3
 }
@@ -55,76 +55,7 @@
 }
 
 - (void)inputVideoData:(YZVideoData *)videoData {
-    CVPixelBufferRef pixelBuffer = videoData.pixelBuffer;
-    size_t width = CVPixelBufferGetWidthOfPlane(pixelBuffer, 0);
-    size_t height = CVPixelBufferGetHeightOfPlane(pixelBuffer, 0);
-    if (videoData.rotation == 90 || videoData.rotation == 270) {
-        [self newDealTextureSize:CGSizeMake(height, width)];
-    } else {
-        [self newDealTextureSize:CGSizeMake(width, height)];
-    }
-    if (!_pixelBuffer || !_texture) { return; }
-#if 1
-    CVMetalTextureRef textureRef = NULL;
-    id<MTLTexture> textureY = NULL;
-    CVReturn status = CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, _textureCache, pixelBuffer, NULL, MTLPixelFormatR8Unorm, width, height, 0, &textureRef);
-    if(status != kCVReturnSuccess) {
-        return;
-    }
-    textureY = CVMetalTextureGetTexture(textureRef);
-    CFRelease(textureRef);
-    textureRef = NULL;
-    
-    id<MTLTexture> textureUV = NULL;
-    width = CVPixelBufferGetWidthOfPlane(pixelBuffer, 1);
-    height = CVPixelBufferGetHeightOfPlane(pixelBuffer, 1);
-    status = CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, _textureCache, pixelBuffer, NULL, MTLPixelFormatRG8Unorm, width, height, 1, &textureRef);
-    if(status != kCVReturnSuccess) {
-        return;
-    }
-    textureUV = CVMetalTextureGetTexture(textureRef);
-    CFRelease(textureRef);
-    textureRef = NULL;
-#else //多消耗2%
-    size_t yWidth = CVPixelBufferGetWidthOfPlane(pixelBuffer, 0);
-    size_t yheight = CVPixelBufferGetHeightOfPlane(pixelBuffer, 0);
-    
-    size_t uvWidth = CVPixelBufferGetWidthOfPlane(pixelBuffer, 1);
-    size_t uvheight = CVPixelBufferGetHeightOfPlane(pixelBuffer, 1);
-    CVPixelBufferLockBaseAddress(videoData.pixelBuffer, 0);
-    
-    
-    MTLTextureDescriptor *yDesc = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatR8Unorm width:yWidth height:yheight mipmapped:NO];
-    yDesc.usage = MTLTextureUsageShaderWrite | MTLTextureUsageRenderTarget | MTLTextureUsageShaderRead;
-    const void *yBytes = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 0);
-    id<MTLTexture> textureY = [YZMetalDevice.defaultDevice.device newTextureWithDescriptor:yDesc];
-    [textureY replaceRegion:MTLRegionMake2D(0, 0, yWidth, yheight) mipmapLevel:0 withBytes:yBytes bytesPerRow:CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 0)];
-    
-    MTLTextureDescriptor *uvDesc = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatRG8Unorm width:uvWidth height:uvheight mipmapped:NO];
-    uvDesc.usage = MTLTextureUsageShaderWrite | MTLTextureUsageRenderTarget | MTLTextureUsageShaderRead;
-    const void *uvBytes = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1);
-    id<MTLTexture> textureUV = [YZMetalDevice.defaultDevice.device newTextureWithDescriptor:uvDesc];
-    [textureUV replaceRegion:MTLRegionMake2D(0, 0, uvWidth, uvheight) mipmapLevel:0 withBytes:uvBytes bytesPerRow:CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 1)];
-    
-    CVPixelBufferUnlockBaseAddress(videoData.pixelBuffer, 0);
-#endif
-    
-    
-    
-    height = CVPixelBufferGetHeight(pixelBuffer);
-    width = CVPixelBufferGetWidth(pixelBuffer);
-    CFTypeRef attachment = CVBufferGetAttachment(pixelBuffer, kCVImageBufferYCbCrMatrixKey, NULL);
-    if (attachment != NULL) {//fullRange
-        if(CFStringCompare(attachment, kCVImageBufferYCbCrMatrix_ITU_R_601_4, 0) == kCFCompareEqualTo) {
-            _colorConversion = kYZColorConversion601FullRange;
-        } else {
-            _colorConversion = kYZColorConversion709;
-        }
-    } else {
-        _colorConversion = kYZColorConversion601FullRange;
-    }
-    
-    [self convertYUVToRGB:textureY textureUV:textureUV rotation:videoData.rotation];
+    NSLog(@"todo:%d:%d:%@", videoData.width, videoData.height, _buffer);
 }
 
 - (void)convertYUVToRGB:(id<MTLTexture>)textureY textureUV:(id<MTLTexture>)textureUV rotation:(int)rotation {
@@ -192,3 +123,4 @@
     textureRef = NULL;
 }
 @end
+

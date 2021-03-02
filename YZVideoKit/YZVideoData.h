@@ -27,13 +27,13 @@
 /** 0, 90, 180, 270 */
 @property (assign, nonatomic) int rotation;
 
-@property (nonatomic, readonly) int yStride;
-@property (nonatomic, readonly) int uStride;
-@property (nonatomic, readonly) int vStride;
+@property (nonatomic) int yStride;
+@property (nonatomic) int uStride;
+@property (nonatomic) int vStride;
 
-@property (nonatomic, readonly) int8_t *yBuffer;
-@property (nonatomic, readonly) int8_t *uBuffer;
-@property (nonatomic, readonly) int8_t *vBuffer;
+@property (nonatomic) int8_t *yBuffer;
+@property (nonatomic) int8_t *uBuffer;
+@property (nonatomic) int8_t *vBuffer;
 @end
 
 

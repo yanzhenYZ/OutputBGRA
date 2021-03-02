@@ -44,6 +44,8 @@
 		9B9C6C0925EE13E8008FC649 /* TYUVDataCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6C0825EE13E8008FC649 /* TYUVDataCapture.m */; };
 		9B9C6C0E25EE13F5008FC649 /* TYUVDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6C0D25EE13F5008FC649 /* TYUVDataViewController.m */; };
 		9B9C6C1725EE14F0008FC649 /* YUVData.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B9C6C1525EE14F0008FC649 /* YUVData.storyboard */; };
+		9B9C6C1B25EE1E51008FC649 /* YZYUVDataPixelBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B9C6C1925EE1E51008FC649 /* YZYUVDataPixelBuffer.h */; };
+		9B9C6C1C25EE1E51008FC649 /* YZYUVDataPixelBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6C1A25EE1E51008FC649 /* YZYUVDataPixelBuffer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +119,8 @@
 		9B9C6C0C25EE13F5008FC649 /* TYUVDataViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYUVDataViewController.h; sourceTree = "<group>"; };
 		9B9C6C0D25EE13F5008FC649 /* TYUVDataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYUVDataViewController.m; sourceTree = "<group>"; };
 		9B9C6C1625EE14F0008FC649 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/YUVData.storyboard; sourceTree = "<group>"; };
+		9B9C6C1925EE1E51008FC649 /* YZYUVDataPixelBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZYUVDataPixelBuffer.h; sourceTree = "<group>"; };
+		9B9C6C1A25EE1E51008FC649 /* YZYUVDataPixelBuffer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZYUVDataPixelBuffer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +239,8 @@
 				9B9C6BD625EDE2D1008FC649 /* YZYUVVideoRangePixelBuffer.m */,
 				9B9C6BDB25EDE428008FC649 /* YZYUVFullRangePixelBuffer.h */,
 				9B9C6BDC25EDE428008FC649 /* YZYUVFullRangePixelBuffer.m */,
+				9B9C6C1925EE1E51008FC649 /* YZYUVDataPixelBuffer.h */,
+				9B9C6C1A25EE1E51008FC649 /* YZYUVDataPixelBuffer.m */,
 			);
 			path = Output;
 			sourceTree = "<group>";
@@ -285,6 +291,7 @@
 				9B9C6BA725ECF81C008FC649 /* YZBGRAPixelBuffer.h in Headers */,
 				9B9C6BDD25EDE428008FC649 /* YZYUVFullRangePixelBuffer.h in Headers */,
 				9B9C6B7325ECE044008FC649 /* YZMetalDevice.h in Headers */,
+				9B9C6C1B25EE1E51008FC649 /* YZYUVDataPixelBuffer.h in Headers */,
 				9B9C6B8725ECE629008FC649 /* YZPixelBuffer.h in Headers */,
 				9B9C6BA225ECF431008FC649 /* YZMetalOrientation.h in Headers */,
 			);
@@ -414,6 +421,7 @@
 				9B9C6BA825ECF81C008FC649 /* YZBGRAPixelBuffer.m in Sources */,
 				9B9C6B9825ECEFDE008FC649 /* YZYUVToRGBConversion.metal in Sources */,
 				9B9C6BDE25EDE428008FC649 /* YZYUVFullRangePixelBuffer.m in Sources */,
+				9B9C6C1C25EE1E51008FC649 /* YZYUVDataPixelBuffer.m in Sources */,
 				9B9C6B8825ECE629008FC649 /* YZPixelBuffer.m in Sources */,
 				9B9C6B9525ECEFD1008FC649 /* YZVertexFragment.metal in Sources */,
 				9B9C6B7A25ECE14D008FC649 /* YZVideoData.m in Sources */,

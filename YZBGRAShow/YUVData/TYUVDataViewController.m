@@ -32,17 +32,85 @@
     _capture = [[TYUVDataCapture alloc] initWithPlayer:_mainPlayer];
     _capture.delegate = self;
     [_capture startRunning];
+    
+//    [self testBuffer];
+}
+
+- (void)testBuffer {
+    CVPixelBufferRef pixelBuffer;
+    OSStatus status = CVPixelBufferCreate(kCFAllocatorDefault, 480, 640, kCVPixelFormatType_420YpCbCr8Planar, nil, &pixelBuffer);
+    if (status != noErr) {
+        NSLog(@"CCC EERRR: %d", status);
+        return;
+    }
+    
+    //NSLog(@"___%d", CVPixelBufferGetPlaneCount(pixelBuffer));
+    //512:256:256 bytes pow row
+    //640:320:320
+    //480:240:240
+    
+    //NSLog(@"---:%d:%d:%d", CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 0), CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 1), CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 2));
+//    (<#CVPixelBufferRef  _Nonnull pixelBuffer#>, <#size_t planeIndex#>)
+//    NSLog(@"---:%d:%d:%d", CVPixelBufferGetHeightOfPlane(pixelBuffer, 0), CVPixelBufferGetHeightOfPlane(pixelBuffer, 1), CVPixelBufferGetHeightOfPlane(pixelBuffer, 2));
+//    NSLog(@"---:%d:%d:%d", CVPixelBufferGetWidthOfPlane(pixelBuffer, 0), CVPixelBufferGetWidthOfPlane(pixelBuffer, 1), CVPixelBufferGetWidthOfPlane(pixelBuffer, 2));
+    
+    //CVPixelBufferGetBytesPerRowOfPlane(<#CVPixelBufferRef  _Nonnull pixelBuffer#>, <#size_t planeIndex#>)
+    CVPixelBufferRelease(pixelBuffer);
+    
+    
 }
 
 #pragma mark - YUVCaptureDelegate
 - (void)capture:(TYUVDataCapture *)capture pixelBuffer:(CVPixelBufferRef)pixelBuffer {
+//    YZVideoData *data = [[YZVideoData alloc] init];
+//    data.pixelBuffer = pixelBuffer;
+//#pragma mark - ROTATION__TEST && RRR11
+//#if 0//不设置AVCaptureConnection视频方向需要设置
+//    data.rotation = [self getOutputRotation];
+//#endif
+//    [_videoOutput inputVideo:data];
+    [self inputVideoData:pixelBuffer];
+}
+
+- (void)inputVideoData:(CVPixelBufferRef)pixelBuffer {
+    CVPixelBufferLockBaseAddress(pixelBuffer, 0);
+    size_t yWidth = CVPixelBufferGetWidthOfPlane(pixelBuffer, 0);
+    size_t yheight = CVPixelBufferGetHeightOfPlane(pixelBuffer, 0);
+    int8_t *yBuffer = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 0);
+    size_t yBytesPow = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 0);
+    //NSLog(@"___1234:%d:%d:%d", yWidth, yheight, yBytesPow);
+    
+    size_t uvWidth = CVPixelBufferGetWidthOfPlane(pixelBuffer, 1);
+    size_t uvheight = CVPixelBufferGetHeightOfPlane(pixelBuffer, 1);
+    int8_t *uvBuffer = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1);
+    size_t uvBytesPow = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 1);
+    //NSLog(@"___1234:%d:%d:%d", uvWidth, uvheight, uvBytesPow);
+    CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
+    
     YZVideoData *data = [[YZVideoData alloc] init];
-    data.pixelBuffer = pixelBuffer;
-    #pragma mark - ROTATION__TEST && RRR11
-    #if 1//不设置AVCaptureConnection视频方向需要设置
-    data.rotation = [self getOutputRotation];
-    #endif
+    data.width = (int)yWidth;
+    data.height = (int)yheight;
+    data.yStride = (int)yWidth;
+    data.yBuffer = yBuffer;
+    
+    int8_t *uBuffer = malloc(uvBytesPow * uvheight / 2);
+    int8_t *vBuffer = malloc(uvBytesPow * uvheight / 2);
+    
+    for (int i = 0; i < uvBytesPow * uvheight / 2; i++) {
+        uBuffer[i] = uvBuffer[2*i];
+        vBuffer[i] = uvBuffer[2*i+1];
+    }
+    
+    data.uStride = uvWidth;
+    data.uBuffer = uBuffer;
+    data.vStride = uvWidth;
+    data.vBuffer = vBuffer;
+    
     [_videoOutput inputVideo:data];
+    
+    free(uBuffer);
+    free(vBuffer);
+    
 }
 
 #pragma mark - YZVideoOutputDelegate

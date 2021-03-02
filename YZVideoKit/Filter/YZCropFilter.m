@@ -14,6 +14,7 @@
 #import "YZBGRAPixelBuffer.h"
 #import "YZYUVVideoRangePixelBuffer.h"
 #import "YZYUVFullRangePixelBuffer.h"
+#import "YZYUVDataPixelBuffer.h"
 
 @interface YZCropFilter ()
 @property (nonatomic, assign) CVMetalTextureCacheRef textureCache;
@@ -23,6 +24,7 @@
 @property (nonatomic, strong) YZBGRAPixelBuffer *bgraBuffer;
 @property (nonatomic, strong) YZYUVVideoRangePixelBuffer *videoRangeBuffer;
 @property (nonatomic, strong) YZYUVFullRangePixelBuffer *fullRangeBuffer;
+@property (nonatomic, strong) YZYUVDataPixelBuffer *dataBuffer;
 @end
 
 @implementation YZCropFilter
@@ -59,6 +61,14 @@
     return _fullRangeBuffer;
 }
 
+- (YZYUVDataPixelBuffer *)dataBuffer {
+    if (!_dataBuffer) {
+        _dataBuffer = [[YZYUVDataPixelBuffer alloc] init];
+        [_dataBuffer setOutputPixelBuffer:_pixelBuffer];
+    }
+    return _dataBuffer;
+}
+
 - (instancetype)init
 {
     self = [super init];
@@ -77,7 +87,7 @@
     if (videoData.pixelBuffer) {
         [self dealPixelBuffer:videoData];
     } else {
-        
+        [self.dataBuffer inputVideoData:videoData];
     }
 }
 #pragma mark - helper
