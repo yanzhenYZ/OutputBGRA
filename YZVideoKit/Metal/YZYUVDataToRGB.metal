@@ -8,6 +8,8 @@
 #include <metal_stdlib>
 using namespace metal;
 
+constant half3x3 YZYUVDATAMAT = half3x3(half3(1.164,1.164,1.164),half3(0.0,-0.213,2.112),half3(1.793,-0.533,0.0));
+
 struct YZYUVDataToRGBVertexIO
 {
     float4 position [[position]];
@@ -16,10 +18,6 @@ struct YZYUVDataToRGBVertexIO
     float2 textureCoordinate3 [[user(texturecoord3)]];
 };
 
-typedef struct//必须四个每行
-{
-    float3x3 colorConversionMatrix;
-} YZYUVDataConversionUniform;
 
 vertex YZYUVDataToRGBVertexIO YZYUVDataToRGBVertex(const device packed_float2 *position [[buffer(0)]],
                                        const device packed_float2 *texturecoord [[buffer(1)]],
@@ -40,8 +38,7 @@ vertex YZYUVDataToRGBVertexIO YZYUVDataToRGBVertex(const device packed_float2 *p
 fragment half4 YZYUVDataConversionFullRangeFragment(YZYUVDataToRGBVertexIO fragmentInput [[stage_in]],
                                      texture2d<half> inputTexture [[texture(0)]],
                                      texture2d<half> inputTexture2 [[texture(1)]],
-                                     texture2d<half> inputTexture3 [[texture(2)]],
-                                     constant YZYUVDataConversionUniform& uniform [[ buffer(0) ]])
+                                     texture2d<half> inputTexture3 [[texture(2)]])
 {
     constexpr sampler quadSampler;
     half3 yuv;
@@ -49,7 +46,7 @@ fragment half4 YZYUVDataConversionFullRangeFragment(YZYUVDataToRGBVertexIO fragm
     yuv.y = inputTexture2.sample(quadSampler, fragmentInput.textureCoordinate2).r - half(0.5);
     yuv.z = inputTexture3.sample(quadSampler, fragmentInput.textureCoordinate3).r - half(0.5);
 
-    half3 rgb = half3x3(uniform.colorConversionMatrix) * yuv;
+    half3 rgb = YZYUVDATAMAT * yuv;
     
     return half4(rgb, 1.0);
 }

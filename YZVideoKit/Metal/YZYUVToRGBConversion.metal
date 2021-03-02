@@ -8,8 +8,6 @@
 #include <metal_stdlib>
 using namespace metal;
 
-using namespace metal;
-
 struct YZYUVToRGBVertexIO
 {
     float4 position [[position]];
