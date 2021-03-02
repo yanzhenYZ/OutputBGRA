@@ -41,6 +41,9 @@
 		9B9C6BD825EDE2D1008FC649 /* YZYUVVideoRangePixelBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6BD625EDE2D1008FC649 /* YZYUVVideoRangePixelBuffer.m */; };
 		9B9C6BDD25EDE428008FC649 /* YZYUVFullRangePixelBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B9C6BDB25EDE428008FC649 /* YZYUVFullRangePixelBuffer.h */; };
 		9B9C6BDE25EDE428008FC649 /* YZYUVFullRangePixelBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6BDC25EDE428008FC649 /* YZYUVFullRangePixelBuffer.m */; };
+		9B9C6BE325EDE752008FC649 /* TYUVViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6BE225EDE752008FC649 /* TYUVViewController.m */; };
+		9B9C6BE825EDE761008FC649 /* TYUVCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6BE725EDE761008FC649 /* TYUVCapture.m */; };
+		9B9C6BF125EDE7C9008FC649 /* Y_U_V.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B9C6BEF25EDE7C9008FC649 /* Y_U_V.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +112,11 @@
 		9B9C6BD625EDE2D1008FC649 /* YZYUVVideoRangePixelBuffer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZYUVVideoRangePixelBuffer.m; sourceTree = "<group>"; };
 		9B9C6BDB25EDE428008FC649 /* YZYUVFullRangePixelBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZYUVFullRangePixelBuffer.h; sourceTree = "<group>"; };
 		9B9C6BDC25EDE428008FC649 /* YZYUVFullRangePixelBuffer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZYUVFullRangePixelBuffer.m; sourceTree = "<group>"; };
+		9B9C6BE125EDE752008FC649 /* TYUVViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYUVViewController.h; sourceTree = "<group>"; };
+		9B9C6BE225EDE752008FC649 /* TYUVViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYUVViewController.m; sourceTree = "<group>"; };
+		9B9C6BE625EDE761008FC649 /* TYUVCapture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYUVCapture.h; sourceTree = "<group>"; };
+		9B9C6BE725EDE761008FC649 /* TYUVCapture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYUVCapture.m; sourceTree = "<group>"; };
+		9B9C6BF025EDE7C9008FC649 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Y_U_V.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,9 +161,11 @@
 			children = (
 				9B9C6B0D25ECD139008FC649 /* AppDelegate.h */,
 				9B9C6B0E25ECD139008FC649 /* AppDelegate.m */,
+				9B9C6BE025EDE703008FC649 /* Y_U_V */,
 				9B9C6BBD25EDD364008FC649 /* YUV */,
 				9B9C6B3625ECD744008FC649 /* BGRA */,
 				9B9C6B1625ECD139008FC649 /* Main.storyboard */,
+				9B9C6BEF25EDE7C9008FC649 /* Y_U_V.storyboard */,
 				9B9C6BC825EDD3B4008FC649 /* YUV.storyboard */,
 				9B9C6B3125ECD72E008FC649 /* BGRA.storyboard */,
 				9B9C6B1925ECD13B008FC649 /* Assets.xcassets */,
@@ -247,6 +257,17 @@
 				9B9C6BCD25EDD3F3008FC649 /* YUVCapture.m */,
 			);
 			path = YUV;
+			sourceTree = "<group>";
+		};
+		9B9C6BE025EDE703008FC649 /* Y_U_V */ = {
+			isa = PBXGroup;
+			children = (
+				9B9C6BE125EDE752008FC649 /* TYUVViewController.h */,
+				9B9C6BE225EDE752008FC649 /* TYUVViewController.m */,
+				9B9C6BE625EDE761008FC649 /* TYUVCapture.h */,
+				9B9C6BE725EDE761008FC649 /* TYUVCapture.m */,
+			);
+			path = Y_U_V;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,6 +373,7 @@
 				9B9C6B1D25ECD13B008FC649 /* LaunchScreen.storyboard in Resources */,
 				9B9C6BCA25EDD3B4008FC649 /* YUV.storyboard in Resources */,
 				9B9C6B1A25ECD13B008FC649 /* Assets.xcassets in Resources */,
+				9B9C6BF125EDE7C9008FC649 /* Y_U_V.storyboard in Resources */,
 				9B9C6B3325ECD72E008FC649 /* BGRA.storyboard in Resources */,
 				9B9C6B1825ECD139008FC649 /* Main.storyboard in Resources */,
 			);
@@ -373,7 +395,9 @@
 			files = (
 				9B9C6B8025ECE1A0008FC649 /* VideoBGRACapture.m in Sources */,
 				9B9C6BCE25EDD3F3008FC649 /* YUVCapture.m in Sources */,
+				9B9C6BE325EDE752008FC649 /* TYUVViewController.m in Sources */,
 				9B9C6B3925ECD754008FC649 /* BGRAViewController.m in Sources */,
+				9B9C6BE825EDE761008FC649 /* TYUVCapture.m in Sources */,
 				9B9C6B0F25ECD139008FC649 /* AppDelegate.m in Sources */,
 				9B9C6B2025ECD13B008FC649 /* main.m in Sources */,
 				9B9C6BC025EDD381008FC649 /* YUVRangeViewController.m in Sources */,
@@ -439,6 +463,14 @@
 				9B9C6BC925EDD3B4008FC649 /* Base */,
 			);
 			name = YUV.storyboard;
+			sourceTree = "<group>";
+		};
+		9B9C6BEF25EDE7C9008FC649 /* Y_U_V.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9B9C6BF025EDE7C9008FC649 /* Base */,
+			);
+			name = Y_U_V.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

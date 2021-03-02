@@ -67,6 +67,30 @@
                                             <segue destination="lJy-QQ-EaM" kind="show" id="B2u-3j-ycC"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="q4k-zn-NDe">
+                                        <rect key="frame" x="0.0" y="142.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="q4k-zn-NDe" id="QU1-Cf-zuB">
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Y_U_V" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Am-vL-zeW">
+                                                    <rect key="frame" x="15" y="0.0" width="49" height="50"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="9Am-vL-zeW" firstAttribute="leading" secondItem="QU1-Cf-zuB" secondAttribute="leading" constant="15" id="fFn-YX-3CS"/>
+                                                <constraint firstAttribute="bottom" secondItem="9Am-vL-zeW" secondAttribute="bottom" id="s7G-o1-6dM"/>
+                                                <constraint firstItem="9Am-vL-zeW" firstAttribute="top" secondItem="QU1-Cf-zuB" secondAttribute="top" id="uMI-uA-dD5"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="XBO-Cv-Pum" kind="show" id="gBW-Fd-OZL"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -115,7 +139,17 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k3E-Fd-Vkr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1830" y="162"/>
+            <point key="canvasLocation" x="1431" y="-113"/>
+        </scene>
+        <!--Y_U_V-->
+        <scene sceneID="f3h-kd-wEH">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Y_U_V" id="XBO-Cv-Pum" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="eYc-Gc-0aU"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="doe-6i-S9N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1653" y="237"/>
         </scene>
     </scenes>
     <resources>
