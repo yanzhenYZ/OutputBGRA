@@ -9,12 +9,12 @@
 #import <CoreVideo/CVPixelBuffer.h>
 #import <MetalKit/MetalKit.h>
 
+@class YZVideoData;
 @protocol YZPixelBufferDelegate;
 @interface YZPixelBuffer : NSObject
 @property (nonatomic, weak) id<YZPixelBufferDelegate> delegate;
 
-- (void)newTextureAvailable:(id<MTLTexture>)texture;
-- (void)outoutPixelBuffer:(CVPixelBufferRef)pixelBuffer;
+- (void)outoutPixelBuffer:(CVPixelBufferRef)pixelBuffer videoData:(YZVideoData *)data;
 @end
 
 @protocol YZPixelBufferDelegate <NSObject>

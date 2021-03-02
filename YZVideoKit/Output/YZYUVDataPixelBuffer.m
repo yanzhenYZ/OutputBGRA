@@ -79,6 +79,7 @@
     [textureV replaceRegion:MTLRegionMake2D(0, 0, textureV.width, textureV.height) mipmapLevel:0 withBytes:videoData.vBuffer bytesPerRow:videoData.vStride];
     
     [self convertYUVToRGB:textureY textureU:textureU textureV:textureV rotation:videoData.rotation];
+    [self.buffer outoutPixelBuffer:_pixelBuffer videoData:videoData];
 }
 
 - (void)convertYUVToRGB:(id<MTLTexture>)textureY textureU:(id<MTLTexture>)textureU textureV:(id<MTLTexture>)textureV rotation:(int)rotation {
@@ -108,8 +109,6 @@
     
     [commandBuffer commit];
     [commandBuffer waitUntilCompleted];
-    
-    [self.buffer outoutPixelBuffer:_pixelBuffer];
 }
 
 #pragma mark - helper

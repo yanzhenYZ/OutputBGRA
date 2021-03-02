@@ -125,6 +125,8 @@
     }
     
     [self convertYUVToRGB:textureY textureUV:textureUV rotation:videoData.rotation];
+    
+    [self.buffer outoutPixelBuffer:_pixelBuffer videoData:videoData];
 }
 
 - (void)convertYUVToRGB:(id<MTLTexture>)textureY textureUV:(id<MTLTexture>)textureUV rotation:(int)rotation {
@@ -155,8 +157,6 @@
     
     [commandBuffer commit];
     [commandBuffer waitUntilCompleted];
-    
-    [self.buffer outoutPixelBuffer:_pixelBuffer];
 }
 
 #pragma mark - helper
