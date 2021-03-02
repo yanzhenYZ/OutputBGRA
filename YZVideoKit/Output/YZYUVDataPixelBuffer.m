@@ -56,32 +56,32 @@
 - (void)setOutputPixelBuffer:(YZPixelBuffer *)pixelBuffer {
     _buffer = pixelBuffer;
 }
-
+//CPU 3%
 - (void)inputVideoData:(YZVideoData *)videoData {
+    int width = videoData.width;
+    int height = videoData.height;
     if (videoData.rotation == 90 || videoData.rotation == 270) {
-        [self newDealTextureSize:CGSizeMake(videoData.height, videoData.width)];
+        [self newDealTextureSize:CGSizeMake(height, width)];
     } else {
-        [self newDealTextureSize:CGSizeMake(videoData.width, videoData.height)];
+        [self newDealTextureSize:CGSizeMake(width, height)];
     }
     if (!_pixelBuffer || !_texture) { return; }
     
-    MTLTextureDescriptor *yDesc = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatR8Unorm width:videoData.yStride height:videoData.height mipmapped:NO];
+    MTLTextureDescriptor *yDesc = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatR8Unorm width:width height:height mipmapped:NO];
     yDesc.usage = MTLTextureUsageShaderWrite | MTLTextureUsageRenderTarget | MTLTextureUsageShaderRead;
-
     id<MTLTexture> textureY = [YZMetalDevice.defaultDevice.device newTextureWithDescriptor:yDesc];
-    [textureY replaceRegion:MTLRegionMake2D(0, 0, videoData.yStride, videoData.height) mipmapLevel:0 withBytes:videoData.yBuffer bytesPerRow:512];
+    [textureY replaceRegion:MTLRegionMake2D(0, 0, textureY.width, textureY.height) mipmapLevel:0 withBytes:videoData.yBuffer bytesPerRow:videoData.yStride];
     
-    MTLTextureDescriptor *uDesc = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatR8Unorm width:videoData.uStride height:videoData.height / 2 mipmapped:NO];
+    MTLTextureDescriptor *uDesc = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatR8Unorm width:width / 2 height:height / 2 mipmapped:NO];
     uDesc.usage = MTLTextureUsageShaderWrite | MTLTextureUsageRenderTarget | MTLTextureUsageShaderRead;
-
     id<MTLTexture> textureU = [YZMetalDevice.defaultDevice.device newTextureWithDescriptor:uDesc];
-    [textureU replaceRegion:MTLRegionMake2D(0, 0, videoData.uStride, videoData.height / 2) mipmapLevel:0 withBytes:videoData.uBuffer bytesPerRow:256];
+    [textureU replaceRegion:MTLRegionMake2D(0, 0, textureU.width, textureU.height) mipmapLevel:0 withBytes:videoData.uBuffer bytesPerRow:videoData.uStride];
     
-    MTLTextureDescriptor *vDesc = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatR8Unorm width:videoData.vStride height:videoData.height / 2 mipmapped:NO];
+    MTLTextureDescriptor *vDesc = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatR8Unorm width:width / 2 height:height / 2 mipmapped:NO];
     vDesc.usage = MTLTextureUsageShaderWrite | MTLTextureUsageRenderTarget | MTLTextureUsageShaderRead;
-    
     id<MTLTexture> textureV = [YZMetalDevice.defaultDevice.device newTextureWithDescriptor:vDesc];
-    [textureV replaceRegion:MTLRegionMake2D(0, 0, videoData.vStride, videoData.height / 2) mipmapLevel:0 withBytes:videoData.vBuffer bytesPerRow:256];
+    [textureV replaceRegion:MTLRegionMake2D(0, 0, textureV.width, textureV.height) mipmapLevel:0 withBytes:videoData.vBuffer bytesPerRow:videoData.vStride];
+    
     [self convertYUVToRGB:textureY textureU:textureU textureV:textureV rotation:videoData.rotation];
 }
 

@@ -62,13 +62,6 @@
 
 #pragma mark - YUVCaptureDelegate
 - (void)capture:(TYUVDataCapture *)capture pixelBuffer:(CVPixelBufferRef)pixelBuffer {
-//    YZVideoData *data = [[YZVideoData alloc] init];
-//    data.pixelBuffer = pixelBuffer;
-//#pragma mark - ROTATION__TEST && RRR11
-//#if 0//不设置AVCaptureConnection视频方向需要设置
-//    data.rotation = [self getOutputRotation];
-//#endif
-//    [_videoOutput inputVideo:data];
     [self inputVideoData:pixelBuffer];
 }
 
@@ -90,7 +83,7 @@
     YZVideoData *data = [[YZVideoData alloc] init];
     data.width = (int)yWidth;
     data.height = (int)yheight;
-    data.yStride = (int)yWidth;
+    data.yStride = (int)yBytesPow;
     data.yBuffer = yBuffer;
     
     int8_t *uBuffer = malloc(uvBytesPow * uvheight / 2);
@@ -101,12 +94,12 @@
         vBuffer[i] = uvBuffer[2*i+1];
     }
     
-    data.uStride = uvWidth;
+    data.uStride = uvBytesPow / 2;
     data.uBuffer = uBuffer;
-    data.vStride = uvWidth;
+    data.vStride = uvBytesPow / 2;
     data.vBuffer = vBuffer;
     
-    //data.rotation = [self getOutputRotation];
+    data.rotation = [self getOutputRotation];
     [_videoOutput inputVideo:data];
     
     free(uBuffer);
