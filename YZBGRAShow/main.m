@@ -7,7 +7,11 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
-
+/**
+ 1. YUV三个buffer
+ 2. 裁剪CVPixelBuffer
+ 3. branch 不支持Metal
+ */
 int main(int argc, char * argv[]) {
     NSString * appDelegateClassName;
     @autoreleasepool {
