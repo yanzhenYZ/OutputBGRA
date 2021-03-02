@@ -99,6 +99,7 @@
     [_player.layer addSublayer:previewLayer];
     
     self.session.sessionPreset = AVCaptureSessionPreset640x480;
+//    self.session.sessionPreset = AVCaptureSessionPreset1280x720;
 #pragma mark - ROTATION__TEST && RRR11
 #if 0
     [_session beginConfiguration];

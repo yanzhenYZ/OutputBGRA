@@ -47,7 +47,7 @@
 
 #pragma mark - YZVideoOutputDelegate
 - (void)video:(YZVideoOutput *)video pixelBuffer:(CVPixelBufferRef)pixelBuffer {
-    [self showPixelBuffer:pixelBuffer];
+    //[self showPixelBuffer:pixelBuffer];
 }
 
 #pragma mark - helper
