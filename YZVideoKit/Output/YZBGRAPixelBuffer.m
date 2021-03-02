@@ -62,7 +62,7 @@
         [self newDealTextureSize:CGSizeMake(width, height)];
     }
     if (!_pixelBuffer || !_texture) { return; }
-    
+#if 1
     CVMetalTextureRef tmpTexture = NULL;
     CVReturn status =  CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, self.textureCache, videoData.pixelBuffer, NULL, MTLPixelFormatBGRA8Unorm, width, height, 0, &tmpTexture);
     if (status != kCVReturnSuccess) {
@@ -71,6 +71,15 @@
     
     id<MTLTexture> texture = CVMetalTextureGetTexture(tmpTexture);
     CFRelease(tmpTexture);
+#else//多消耗2% CPU
+    MTLTextureDescriptor *tDesc = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatBGRA8Unorm width:width height:height mipmapped:NO];
+    tDesc.usage = MTLTextureUsageShaderWrite | MTLTextureUsageRenderTarget | MTLTextureUsageShaderRead;
+    CVPixelBufferLockBaseAddress(videoData.pixelBuffer, 0);
+    const void *bytes = CVPixelBufferGetBaseAddress(videoData.pixelBuffer);
+    id<MTLTexture> texture = [YZMetalDevice.defaultDevice.device newTextureWithDescriptor:tDesc];
+    [texture replaceRegion:MTLRegionMake2D(0, 0, width, height) mipmapLevel:0 withBytes:bytes bytesPerRow:CVPixelBufferGetBytesPerRow(videoData.pixelBuffer)];
+    CVPixelBufferUnlockBaseAddress(videoData.pixelBuffer, 0);
+#endif
     
     MTLRenderPassDescriptor *desc = [YZMetalDevice newRenderPassDescriptor:_texture];
     id<MTLCommandBuffer> commandBuffer = [YZMetalDevice.defaultDevice commandBuffer];
