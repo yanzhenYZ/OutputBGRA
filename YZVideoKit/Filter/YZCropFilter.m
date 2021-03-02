@@ -102,7 +102,7 @@
     } else if (type == kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange) {
         [self.videoRangeBuffer inputVideoData:videoData];
     } else if (type == kCVPixelFormatType_420YpCbCr8BiPlanarFullRange) {
-        [self.fullRangeBuffer inputVideoData:videoData];
+        [self.fullRangeBuffer inputVideo:videoData];
     }
 }
 

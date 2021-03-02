@@ -37,7 +37,7 @@
 
 #pragma mark - YZVideoOutputDelegate
 - (void)video:(YZVideoOutput *)video pixelBuffer:(CVPixelBufferRef)pixelBuffer {
-    NSLog(@"OUT:%d:%d", CVPixelBufferGetWidth(pixelBuffer), CVPixelBufferGetHeight(pixelBuffer));
+    //NSLog(@"OUT:%d:%d", CVPixelBufferGetWidth(pixelBuffer), CVPixelBufferGetHeight(pixelBuffer));
     [self showPixelBuffer:pixelBuffer];
 }
 

@@ -22,20 +22,9 @@ typedef NS_ENUM(NSInteger, YZOrientation) {
 };
 
 @interface YZMetalOrientation : NSObject
-@property (nonatomic) YZOrientation outputOrientation;
-/**
- default is YES.
- Only use for AVCaptureDevicePositionFront
- */
-@property (nonatomic) BOOL mirror;
 
 + (simd_float8)defaultVertices;
 + (simd_float8)defaultTextureCoordinates;
 + (simd_float8)getRotationTextureCoordinates:(int)rotation;
 
-- (simd_float8)getTextureCoordinates;
-- (simd_float8)getTextureCoordinates:(AVCaptureDevicePosition)position;
-
-- (BOOL)switchWithHeight;
-- (void)switchCamera;
 @end

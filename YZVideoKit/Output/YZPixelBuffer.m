@@ -17,10 +17,10 @@
 @implementation YZPixelBuffer
 
 - (void)outoutPixelBuffer:(CVPixelBufferRef)pixelBuffer videoData:(YZVideoData *)data {
-    [self cutPixelBuffer:pixelBuffer videoData:data];
-//    if ([_delegate respondsToSelector:@selector(buffer:pixelBuffer:)]) {
-//        [_delegate buffer:self pixelBuffer:pixelBuffer];
-//    }
+    //[self cutPixelBuffer:pixelBuffer videoData:data];//BGRA cut
+    if ([_delegate respondsToSelector:@selector(buffer:pixelBuffer:)]) {
+        [_delegate buffer:self pixelBuffer:pixelBuffer];
+    }
 }
 
 #pragma mark - helper

@@ -9,50 +9,24 @@
 #import <MetalKit/MetalKit.h>
 #import "YZVideoData.h"
 #import "YZMetalDevice.h"
-#import "YZPixelBuffer.h"
 #import "YZMetalOrientation.h"
 
 @interface YZBGRAPixelBuffer ()
-@property (nonatomic, strong) id<MTLRenderPipelineState> pipelineState;
-@property (nonatomic, assign) CVMetalTextureCacheRef textureCache;
-@property (nonatomic, strong) id<MTLTexture> texture;
-@property (nonatomic) CGSize size;
 
-@property (nonatomic, strong) YZPixelBuffer *buffer;
 @end
 
-@implementation YZBGRAPixelBuffer {
-    CVPixelBufferRef _pixelBuffer;
-}
-
-- (void)dealloc
-{
-    if (_pixelBuffer) {
-        CVPixelBufferRelease(_pixelBuffer);
-        _pixelBuffer = nil;
-    }
-    
-    if (_textureCache) {
-        CVMetalTextureCacheFlush(_textureCache, 0);
-        CFRelease(_textureCache);
-        _textureCache = nil;
-    }
-}
+@implementation YZBGRAPixelBuffer;
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        CVMetalTextureCacheCreate(NULL, NULL, YZMetalDevice.defaultDevice.device, NULL, &_textureCache);
-        _pipelineState = [YZMetalDevice.defaultDevice newRenderPipeline:@"YZInputVertex" fragment:@"YZFragment"];
+        self.pipelineState = [YZMetalDevice.defaultDevice newRenderPipeline:@"YZInputVertex" fragment:@"YZFragment"];
     }
     return self;
 }
 
-- (void)setOutputPixelBuffer:(YZPixelBuffer *)pixelBuffer {
-    _buffer = pixelBuffer;
-}
-
+//todo cut
 - (void)inputVideo:(YZVideoData *)videoData {
     int width = (int)CVPixelBufferGetWidth(videoData.pixelBuffer);
     int height = (int)CVPixelBufferGetHeight(videoData.pixelBuffer);
@@ -61,7 +35,8 @@
     } else {
         [self newDealTextureSize:CGSizeMake(width, height)];
     }
-    if (!_pixelBuffer || !_texture) { return; }
+    
+    if (![self continueMetal]) {  return; }
 #if 1
     CVMetalTextureRef tmpTexture = NULL;
     CVReturn status =  CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, self.textureCache, videoData.pixelBuffer, NULL, MTLPixelFormatBGRA8Unorm, width, height, 0, &tmpTexture);
@@ -81,7 +56,7 @@
     CVPixelBufferUnlockBaseAddress(videoData.pixelBuffer, 0);
 #endif
     
-    MTLRenderPassDescriptor *desc = [YZMetalDevice newRenderPassDescriptor:_texture];
+    MTLRenderPassDescriptor *desc = [YZMetalDevice newRenderPassDescriptor:self.texture];
     id<MTLCommandBuffer> commandBuffer = [YZMetalDevice.defaultDevice commandBuffer];
     id<MTLRenderCommandEncoder> encoder = [commandBuffer renderCommandEncoderWithDescriptor:desc];
     if (!encoder) {
@@ -103,40 +78,8 @@
     
     [commandBuffer commit];
     [commandBuffer waitUntilCompleted];
-    
-    [self.buffer outoutPixelBuffer:_pixelBuffer videoData:videoData];
+    [self outoutVideoData:videoData];
 }
 
-#pragma mark - helper
-- (void)newDealTextureSize:(CGSize)size {
-    if (!CGSizeEqualToSize(_size, size)) {
-        if (_pixelBuffer) {
-            CVPixelBufferRelease(_pixelBuffer);
-            _pixelBuffer = nil;
-        }
-        _size = size;
-    }
-    
-    if (_pixelBuffer) { return; }
-    NSDictionary *pixelAttributes = @{(NSString *)kCVPixelBufferIOSurfacePropertiesKey:@{}};
-    CVReturn result = CVPixelBufferCreate(kCFAllocatorDefault,
-                                            _size.width,
-                                            _size.height,
-                                            kCVPixelFormatType_32BGRA,
-                                            (__bridge CFDictionaryRef)(pixelAttributes),
-                                            &_pixelBuffer);
-    if (result != kCVReturnSuccess) {
-        NSLog(@"YZBGRAPixelBuffer to create cvpixelbuffer %d", result);
-        return;
-    }
-    
-    CVMetalTextureRef textureRef = NULL;
-    CVReturn status = CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, _textureCache, _pixelBuffer, nil, MTLPixelFormatBGRA8Unorm, size.width, size.height, 0, &textureRef);
-    if (kCVReturnSuccess != status) {
-        return;
-    }
-    _texture = CVMetalTextureGetTexture(textureRef);
-    CFRelease(textureRef);
-    textureRef = NULL;
-}
+
 @end
