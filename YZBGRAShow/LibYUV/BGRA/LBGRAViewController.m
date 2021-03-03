@@ -6,7 +6,8 @@
 //
 
 #import "LBGRAViewController.h"
-//#import <YZLibyuv/YZLibyuv.h>
+#import "VideoBGRACapture.h"
+#import <YZLibyuv/YZLibyuv.h>
 
 @interface LBGRAViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *mainPlayer;
@@ -19,6 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [YZLibyuv test];
 }
 
 #pragma mark - UI
