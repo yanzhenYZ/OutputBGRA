@@ -75,7 +75,7 @@
 		9B9C6D5725EF90B8008FC649 /* YZLibVideoData.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B9C6D5525EF90B8008FC649 /* YZLibVideoData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B9C6D5825EF90B8008FC649 /* YZLibVideoData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6D5625EF90B8008FC649 /* YZLibVideoData.m */; };
 		9B9C6D5E25EF92CE008FC649 /* YZLibyuvTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B9C6D5C25EF92CE008FC649 /* YZLibyuvTool.h */; };
-		9B9C6D5F25EF92CE008FC649 /* YZLibyuvTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6D5D25EF92CE008FC649 /* YZLibyuvTool.m */; };
+		9B9C6D5F25EF92CE008FC649 /* YZLibyuvTool.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6D5D25EF92CE008FC649 /* YZLibyuvTool.mm */; };
 		9B9C6D6425EF92FF008FC649 /* LibyuvBGRAPixelBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B9C6D6225EF92FF008FC649 /* LibyuvBGRAPixelBuffer.h */; };
 		9B9C6D6525EF92FF008FC649 /* LibyuvBGRAPixelBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6D6325EF92FF008FC649 /* LibyuvBGRAPixelBuffer.m */; };
 		9B9C6D6A25EF9444008FC649 /* YZLibyuvPixelBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B9C6D6825EF9444008FC649 /* YZLibyuvPixelBuffer.h */; };
@@ -153,7 +153,7 @@
 		9B9C6D5525EF90B8008FC649 /* YZLibVideoData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZLibVideoData.h; sourceTree = "<group>"; };
 		9B9C6D5625EF90B8008FC649 /* YZLibVideoData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZLibVideoData.m; sourceTree = "<group>"; };
 		9B9C6D5C25EF92CE008FC649 /* YZLibyuvTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZLibyuvTool.h; sourceTree = "<group>"; };
-		9B9C6D5D25EF92CE008FC649 /* YZLibyuvTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZLibyuvTool.m; sourceTree = "<group>"; };
+		9B9C6D5D25EF92CE008FC649 /* YZLibyuvTool.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = YZLibyuvTool.mm; sourceTree = "<group>"; };
 		9B9C6D6225EF92FF008FC649 /* LibyuvBGRAPixelBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LibyuvBGRAPixelBuffer.h; sourceTree = "<group>"; };
 		9B9C6D6325EF92FF008FC649 /* LibyuvBGRAPixelBuffer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LibyuvBGRAPixelBuffer.m; sourceTree = "<group>"; };
 		9B9C6D6825EF9444008FC649 /* YZLibyuvPixelBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZLibyuvPixelBuffer.h; sourceTree = "<group>"; };
@@ -300,7 +300,7 @@
 				9B9C6D5525EF90B8008FC649 /* YZLibVideoData.h */,
 				9B9C6D5625EF90B8008FC649 /* YZLibVideoData.m */,
 				9B9C6D5C25EF92CE008FC649 /* YZLibyuvTool.h */,
-				9B9C6D5D25EF92CE008FC649 /* YZLibyuvTool.m */,
+				9B9C6D5D25EF92CE008FC649 /* YZLibyuvTool.mm */,
 				9B9C6D6825EF9444008FC649 /* YZLibyuvPixelBuffer.h */,
 				9B9C6D6925EF9444008FC649 /* YZLibyuvPixelBuffer.m */,
 			);
@@ -425,7 +425,7 @@
 				9B9C6D0B25EF7273008FC649 /* convert_to_i420.cc in Sources */,
 				9B9C6CF925EF7272008FC649 /* row_common.cc in Sources */,
 				9B9C6D0925EF7273008FC649 /* rotate_neon.cc in Sources */,
-				9B9C6D5F25EF92CE008FC649 /* YZLibyuvTool.m in Sources */,
+				9B9C6D5F25EF92CE008FC649 /* YZLibyuvTool.mm in Sources */,
 				9B9C6D0425EF7272008FC649 /* scale_neon64.cc in Sources */,
 				9B9C6CE925EF7272008FC649 /* scale_gcc.cc in Sources */,
 				9B9C6D6B25EF9444008FC649 /* YZLibyuvPixelBuffer.m in Sources */,
