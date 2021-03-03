@@ -6,9 +6,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "YZLibVideoData.h"
 
+@protocol YZLibyuvDelegate;
 @interface YZLibyuv : NSObject
-+ (void)test;
+@property (nonatomic, assign) id<YZLibyuvDelegate> delegate;
+
+- (void)inputVideoData:(YZLibVideoData *)videoData;
+
 @end
 
+@protocol YZLibyuvDelegate <NSObject>
 
+- (void)libyuv:(YZLibyuv *)yuv pixelBuffer:(CVPixelBufferRef)pixelBuffer;
+
+@end

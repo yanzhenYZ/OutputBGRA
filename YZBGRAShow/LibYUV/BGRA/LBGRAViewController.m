@@ -9,13 +9,16 @@
 #import "VideoBGRACapture.h"
 #import <YZLibyuv/YZLibyuv.h>
 
-@interface LBGRAViewController ()<VideoBGRACaptureDelegate>
+@interface LBGRAViewController ()<VideoBGRACaptureDelegate, YZLibyuvDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *mainPlayer;
 @property (weak, nonatomic) IBOutlet UIImageView *showPlayer;
 
 @property (nonatomic, strong) VideoBGRACapture *capture;
+@property (nonatomic, strong) YZLibyuv *libyuv;
+
 
 @property (nonatomic, strong) CIContext *context;
+
 @end
 
 @implementation LBGRAViewController
@@ -23,8 +26,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [YZLibyuv test];
     
+    _libyuv = [[YZLibyuv alloc] init];
+    _libyuv.delegate = self;
     _context = [CIContext contextWithOptions:nil];
     
     _capture = [[VideoBGRACapture alloc] initWithPlayer:_mainPlayer];
@@ -34,7 +38,29 @@
 
 #pragma mark - VideoBGRACaptureDelegate
 - (void)capture:(VideoBGRACapture *)capture pixelBuffer:(CVPixelBufferRef)pixelBuffer {
-    
+    YZLibVideoData *data = [[YZLibVideoData alloc] init];
+    data.pixelBuffer = pixelBuffer;
+#pragma mark - ROTATION__TEST && RRR11
+#if 1//不设置AVCaptureConnection视频方向需要设置
+    data.rotation = [self getOutputRotation];
+#endif
+
+//test
+#if 0
+    if (CVPixelBufferGetHeight(pixelBuffer) == 480) {
+        data.cropLeft = 60;
+        data.cropRight = 60;
+        data.cropTop = 60;
+        data.cropBottom = 60;
+    }
+#endif
+
+    [_libyuv inputVideoData:data];
+}
+
+#pragma mark - YZLibyuvDelegate
+-(void)libyuv:(YZLibyuv *)yuv pixelBuffer:(CVPixelBufferRef)pixelBuffer {
+    [self showPixelBuffer:pixelBuffer];
 }
 
 #pragma mark - helper
