@@ -18,9 +18,7 @@
 
 - (void)inputVideo:(YZVideoData *)videoData;
 - (void)setOutputPixelBuffer:(YZPixelBuffer *)pixelBuffer;
-- (void)newDealTextureSize:(CGSize)size;
 - (void)outoutVideoData:(YZVideoData *)data;
-- (BOOL)continueMetal;
 
 - (BOOL)cropTextureSize:(CGSize)size videoData:(YZVideoData *)data;
 - (CGRect)getCropWith:(CGSize)size videoData:(YZVideoData *)data;

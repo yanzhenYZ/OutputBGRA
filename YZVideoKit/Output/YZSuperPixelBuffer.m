@@ -66,7 +66,6 @@
     return CGRectMake(x, y, w, h);
 }
 
-#pragma mark - helper
 - (BOOL)cropTextureSize:(CGSize)size videoData:(YZVideoData *)data {
     CGFloat width = size.width - data.cropLeft - data.cropRight;
     CGFloat height = size.height - data.cropTop - data.cropBottom;
@@ -79,6 +78,7 @@
     return [self continueMetal];
 }
 
+#pragma mark - helper
 - (void)newDealTextureSize:(CGSize)size {
     if (!CGSizeEqualToSize(_size, size)) {
         if (_pixelBuffer) {

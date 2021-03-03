@@ -99,6 +99,16 @@
     data.vStride = uvBytesPow / 2;
     data.vBuffer = vBuffer;
     
+#if 1
+    if (CVPixelBufferGetWidth(pixelBuffer) == 480) {
+        data.cropLeft = 60;
+        data.cropRight = 60;
+    } else {
+        data.cropTop = 60;
+        data.cropBottom = 60;
+    }
+#endif
+    
     data.rotation = [self getOutputRotation];
     [_videoOutput inputVideo:data];
     

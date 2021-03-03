@@ -25,12 +25,9 @@
 - (void)inputVideo:(YZVideoData *)videoData {
     int width = videoData.width;
     int height = videoData.height;
-    if (videoData.rotation == 90 || videoData.rotation == 270) {
-        [self newDealTextureSize:CGSizeMake(height, width)];
-    } else {
-        [self newDealTextureSize:CGSizeMake(width, height)];
+    if (![self cropTextureSize:CGSizeMake(width, height) videoData:videoData]) {
+        return;
     }
-    if (![self continueMetal]) {  return; }
     
     MTLTextureDescriptor *yDesc = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatR8Unorm width:width height:height mipmapped:NO];
     yDesc.usage = MTLTextureUsageShaderWrite | MTLTextureUsageRenderTarget | MTLTextureUsageShaderRead;
@@ -46,12 +43,7 @@
     vDesc.usage = MTLTextureUsageShaderWrite | MTLTextureUsageRenderTarget | MTLTextureUsageShaderRead;
     id<MTLTexture> textureV = [YZMetalDevice.defaultDevice.device newTextureWithDescriptor:vDesc];
     [textureV replaceRegion:MTLRegionMake2D(0, 0, textureV.width, textureV.height) mipmapLevel:0 withBytes:videoData.vBuffer bytesPerRow:videoData.vStride];
-    
-    [self convertYUVToRGB:textureY textureU:textureU textureV:textureV rotation:videoData.rotation];
-    [self outoutVideoData:videoData];
-}
-
-- (void)convertYUVToRGB:(id<MTLTexture>)textureY textureU:(id<MTLTexture>)textureU textureV:(id<MTLTexture>)textureV rotation:(int)rotation {
+    //
     MTLRenderPassDescriptor *desc = [YZMetalDevice newRenderPassDescriptor:self.texture];
     id<MTLCommandBuffer> commandBuffer = [YZMetalDevice.defaultDevice commandBuffer];
     id<MTLRenderCommandEncoder> encoder = [commandBuffer renderCommandEncoderWithDescriptor:desc];
@@ -65,7 +57,8 @@
     simd_float8 vertices = [YZMetalOrientation defaultVertices];
     [encoder setVertexBytes:&vertices length:sizeof(simd_float8) atIndex:0];
     
-    simd_float8 textureCoordinates = [YZMetalOrientation getRotationTextureCoordinates:rotation];
+    CGRect crop = [self getCropWith:CGSizeMake(width, height) videoData:videoData];
+    simd_float8 textureCoordinates = [YZMetalOrientation getCropRotationTextureCoordinates:videoData.rotation crop:crop];
     [encoder setVertexBytes:&textureCoordinates length:sizeof(simd_float8) atIndex:1];
     [encoder setFragmentTexture:textureY atIndex:0];
     [encoder setVertexBytes:&textureCoordinates length:sizeof(simd_float8) atIndex:2];
@@ -78,6 +71,7 @@
     
     [commandBuffer commit];
     [commandBuffer waitUntilCompleted];
+    [self outoutVideoData:videoData];
 }
 
 @end
