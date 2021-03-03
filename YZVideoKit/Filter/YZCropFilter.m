@@ -41,8 +41,8 @@
 - (void)dealPixelBuffer:(YZVideoData *)videoData {
     OSType type = CVPixelBufferGetPixelFormatType(videoData.pixelBuffer);
     if (type == kCVPixelFormatType_32BGRA) {
-        if (videoData.rotation == 0) {
-            [_pixelBuffer outoutPixelBuffer:videoData.pixelBuffer videoData:videoData];
+        if (videoData.rotation == 0 && videoData.cropTop == 0 && videoData.cropBottom == 0 && videoData.cropRight == 0 && videoData.cropLeft == 0) {
+            [self.pixelBuffer outoutPixelBuffer:videoData.pixelBuffer videoData:videoData];
         } else {
             [self.bgraBuffer inputVideo:videoData];
         }

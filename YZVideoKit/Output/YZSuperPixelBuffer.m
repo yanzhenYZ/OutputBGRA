@@ -59,10 +59,13 @@
 }
 #pragma mark - helper
 - (void)cropTextureSize:(CGSize)size videoData:(YZVideoData *)data {
+    CGFloat width = size.width - data.cropLeft - data.cropRight;
+    CGFloat height = size.height - data.cropTop - data.cropBottom;
+    CGSize outoutSize = CGSizeMake(width, height);
     if (data.rotation == 90 || data.rotation == 270) {
-        [self newDealTextureSize:CGSizeMake(size.height, size.width)];
+        [self newDealTextureSize:CGSizeMake(outoutSize.height, outoutSize.width)];
     } else {
-        [self newDealTextureSize:size];
+        [self newDealTextureSize:outoutSize];
     }
 }
 

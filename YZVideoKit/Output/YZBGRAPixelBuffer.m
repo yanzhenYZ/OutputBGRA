@@ -30,11 +30,6 @@
 - (void)inputVideo:(YZVideoData *)videoData {
     int width = (int)CVPixelBufferGetWidth(videoData.pixelBuffer);
     int height = (int)CVPixelBufferGetHeight(videoData.pixelBuffer);
-//    if (videoData.rotation == 90 || videoData.rotation == 270) {
-//        [self newDealTextureSize:CGSizeMake(height, width)];
-//    } else {
-//        [self newDealTextureSize:CGSizeMake(width, height)];
-//    }
     [self cropTextureSize:CGSizeMake(width, height) videoData:videoData];
     
     if (![self continueMetal]) {  return; }
