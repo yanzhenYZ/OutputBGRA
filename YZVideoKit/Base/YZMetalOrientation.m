@@ -88,18 +88,30 @@ typedef NS_ENUM(NSInteger, YZRotation) {
         return [self getRotationTextureCoordinates:rotation];
     }
 //    NSLog(@"1234___%@", NSStringFromCGRect(crop));
-    switch (rotation) {//todo
-        case 90:
-            return YZRotateCounterclockwise;
+    CGFloat x = crop.origin.x;
+    CGFloat y = crop.origin.y;
+    CGFloat maxX = CGRectGetMaxX(crop);
+    CGFloat maxY = CGRectGetMaxY(crop);
+    switch (rotation) {
+        case 90: {
+            simd_float8 t = {x, maxY, x, y, maxX, maxY, maxX, y};
+            return t;
+        }
             break;
-        case 180:
-            return YZRotate180;
+        case 180:{
+            simd_float8 t = {maxX, maxY, x, maxY, maxX, y, x, y};
+            return t;
+        }
             break;
-        case 270:
-            return YZRotateClockwise;
+        case 270:{
+            simd_float8 t = {maxX, y, maxX, maxY, x, y, x, maxY};
+            return t;
+        }
             break;
-        default:
-            return YZNoRotation;
+        default:{
+            simd_float8 t = {x, y, maxX, y, x, maxY, maxX, maxY};
+            return t;
+        }
             break;
     }
 }
