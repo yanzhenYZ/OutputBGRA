@@ -21,6 +21,8 @@
 - (void)newDealTextureSize:(CGSize)size;
 - (void)outoutVideoData:(YZVideoData *)data;
 - (BOOL)continueMetal;
+
+- (void)cropTextureSize:(CGSize)size videoData:(YZVideoData *)data;
 @end
 
 

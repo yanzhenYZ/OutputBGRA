@@ -239,6 +239,8 @@
 			children = (
 				9B9C6B8525ECE629008FC649 /* YZPixelBuffer.h */,
 				9B9C6B8625ECE629008FC649 /* YZPixelBuffer.m */,
+				9B9C6C2D25EE4EE1008FC649 /* YZSuperPixelBuffer.h */,
+				9B9C6C2E25EE4EE1008FC649 /* YZSuperPixelBuffer.m */,
 				9B9C6BA525ECF81C008FC649 /* YZBGRAPixelBuffer.h */,
 				9B9C6BA625ECF81C008FC649 /* YZBGRAPixelBuffer.m */,
 				9B9C6BD525EDE2D1008FC649 /* YZYUVVideoRangePixelBuffer.h */,
@@ -247,8 +249,6 @@
 				9B9C6BDC25EDE428008FC649 /* YZYUVFullRangePixelBuffer.m */,
 				9B9C6C1925EE1E51008FC649 /* YZYUVDataPixelBuffer.h */,
 				9B9C6C1A25EE1E51008FC649 /* YZYUVDataPixelBuffer.m */,
-				9B9C6C2D25EE4EE1008FC649 /* YZSuperPixelBuffer.h */,
-				9B9C6C2E25EE4EE1008FC649 /* YZSuperPixelBuffer.m */,
 			);
 			path = Output;
 			sourceTree = "<group>";
@@ -654,7 +654,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20210302;
+				CURRENT_PROJECT_VERSION = 20210303;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 7XP66VHL84;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -684,7 +684,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20210302;
+				CURRENT_PROJECT_VERSION = 20210303;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 7XP66VHL84;
 				DYLIB_COMPATIBILITY_VERSION = 1;

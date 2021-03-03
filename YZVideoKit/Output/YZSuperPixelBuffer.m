@@ -8,6 +8,7 @@
 #import "YZSuperPixelBuffer.h"
 #import "YZPixelBuffer.h"
 #import "YZMetalDevice.h"
+#import "YZVideoData.h"
 
 @interface YZSuperPixelBuffer ()
 @property (nonatomic) CGSize size;
@@ -57,6 +58,14 @@
     return YES;
 }
 #pragma mark - helper
+- (void)cropTextureSize:(CGSize)size videoData:(YZVideoData *)data {
+    if (data.rotation == 90 || data.rotation == 270) {
+        [self newDealTextureSize:CGSizeMake(size.height, size.width)];
+    } else {
+        [self newDealTextureSize:size];
+    }
+}
+
 - (void)newDealTextureSize:(CGSize)size {
     if (!CGSizeEqualToSize(_size, size)) {
         if (_pixelBuffer) {
