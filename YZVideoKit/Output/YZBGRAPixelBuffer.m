@@ -30,8 +30,9 @@
 - (void)inputVideo:(YZVideoData *)videoData {
     int width = (int)CVPixelBufferGetWidth(videoData.pixelBuffer);
     int height = (int)CVPixelBufferGetHeight(videoData.pixelBuffer);
+    //start 1
     [self cropTextureSize:CGSizeMake(width, height) videoData:videoData];
-    
+    //end 1
     if (![self continueMetal]) {  return; }
     CVMetalTextureRef tmpTexture = NULL;
     CVReturn status =  CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, self.textureCache, videoData.pixelBuffer, NULL, MTLPixelFormatBGRA8Unorm, width, height, 0, &tmpTexture);
@@ -55,7 +56,9 @@
     simd_float8 vertices = [YZMetalOrientation defaultVertices];
     [encoder setVertexBytes:&vertices length:sizeof(simd_float8) atIndex:0];
     
+    //start 2 todo
     simd_float8 textureCoordinates = [YZMetalOrientation getRotationTextureCoordinates:videoData.rotation];
+    //end 2
     [encoder setVertexBytes:&textureCoordinates length:sizeof(simd_float8) atIndex:1];
     [encoder setFragmentTexture:texture atIndex:0];
     

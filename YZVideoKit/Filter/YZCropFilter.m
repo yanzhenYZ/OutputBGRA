@@ -41,16 +41,23 @@
 - (void)dealPixelBuffer:(YZVideoData *)videoData {
     OSType type = CVPixelBufferGetPixelFormatType(videoData.pixelBuffer);
     if (type == kCVPixelFormatType_32BGRA) {
-        if (videoData.rotation == 0 && videoData.cropTop == 0 && videoData.cropBottom == 0 && videoData.cropRight == 0 && videoData.cropLeft == 0) {
-            [self.pixelBuffer outoutPixelBuffer:videoData.pixelBuffer videoData:videoData];
-        } else {
+        if ([self needCropRotation:videoData]) {
             [self.bgraBuffer inputVideo:videoData];
+        } else {
+            [self.pixelBuffer outoutPixelBuffer:videoData.pixelBuffer videoData:videoData];
         }
     } else if (type == kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange) {
         [self.videoRangeBuffer inputVideo:videoData];
     } else if (type == kCVPixelFormatType_420YpCbCr8BiPlanarFullRange) {
         [self.fullRangeBuffer inputVideo:videoData];
     }
+}
+
+- (BOOL)needCropRotation:(YZVideoData *)data {
+    if (data.rotation == 0 && data.cropTop == 0 && data.cropBottom == 0 && data.cropRight == 0 && data.cropLeft == 0) {
+        return NO;
+    }
+    return YES;
 }
 
 #pragma mark - lazy var

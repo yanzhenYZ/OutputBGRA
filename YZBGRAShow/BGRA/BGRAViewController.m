@@ -51,7 +51,7 @@
 #endif
     
 //test
-#if 1
+#if 0
     if (CVPixelBufferGetWidth(pixelBuffer) == 480) {
         data.cropLeft = 60;
         data.cropRight = 60;
