@@ -57,8 +57,17 @@
     }
     return YES;
 }
+
+- (CGRect)getCropWith:(CGSize)size videoData:(YZVideoData *)data {
+    CGFloat x = data.cropLeft / size.width;
+    CGFloat y = data.cropTop / size.height;
+    CGFloat w =  1 - x - data.cropRight / size.width;
+    CGFloat h =  1 - y - data.cropBottom / size.height;
+    return CGRectMake(x, y, w, h);
+}
+
 #pragma mark - helper
-- (void)cropTextureSize:(CGSize)size videoData:(YZVideoData *)data {
+- (BOOL)cropTextureSize:(CGSize)size videoData:(YZVideoData *)data {
     CGFloat width = size.width - data.cropLeft - data.cropRight;
     CGFloat height = size.height - data.cropTop - data.cropBottom;
     CGSize outoutSize = CGSizeMake(width, height);
@@ -67,6 +76,7 @@
     } else {
         [self newDealTextureSize:outoutSize];
     }
+    return [self continueMetal];
 }
 
 - (void)newDealTextureSize:(CGSize)size {

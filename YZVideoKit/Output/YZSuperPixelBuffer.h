@@ -22,7 +22,8 @@
 - (void)outoutVideoData:(YZVideoData *)data;
 - (BOOL)continueMetal;
 
-- (void)cropTextureSize:(CGSize)size videoData:(YZVideoData *)data;
+- (BOOL)cropTextureSize:(CGSize)size videoData:(YZVideoData *)data;
+- (CGRect)getCropWith:(CGSize)size videoData:(YZVideoData *)data;
 @end
 
 
