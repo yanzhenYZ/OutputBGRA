@@ -26,7 +26,14 @@
     return self;
 }
 
-//todo cut
+- (CGRect)getCropWith:(CGSize)size videoData:(YZVideoData *)data {
+    CGFloat x = data.cropLeft / size.width;
+    CGFloat y = data.cropTop / size.height;
+    CGFloat w =  1 - x - data.cropRight / size.width;
+    CGFloat h =  1 - y - data.cropBottom / size.height;
+    return CGRectMake(x, y, w, h);
+}
+
 - (void)inputVideo:(YZVideoData *)videoData {
     int width = (int)CVPixelBufferGetWidth(videoData.pixelBuffer);
     int height = (int)CVPixelBufferGetHeight(videoData.pixelBuffer);
@@ -56,8 +63,9 @@
     simd_float8 vertices = [YZMetalOrientation defaultVertices];
     [encoder setVertexBytes:&vertices length:sizeof(simd_float8) atIndex:0];
     
-    //start 2 todo
-    simd_float8 textureCoordinates = [YZMetalOrientation getRotationTextureCoordinates:videoData.rotation];
+    //start 2
+    CGRect crop = [self getCropWith:CGSizeMake(width, height) videoData:videoData];
+    simd_float8 textureCoordinates = [YZMetalOrientation getCropRotationTextureCoordinates:videoData.rotation crop:crop];
     //end 2
     [encoder setVertexBytes:&textureCoordinates length:sizeof(simd_float8) atIndex:1];
     [encoder setFragmentTexture:texture atIndex:0];

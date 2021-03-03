@@ -27,4 +27,5 @@ typedef NS_ENUM(NSInteger, YZOrientation) {
 + (simd_float8)defaultTextureCoordinates;
 + (simd_float8)getRotationTextureCoordinates:(int)rotation;
 
++ (simd_float8)getCropRotationTextureCoordinates:(int)rotation crop:(CGRect)crop;
 @end

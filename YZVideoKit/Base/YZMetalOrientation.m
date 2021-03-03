@@ -83,5 +83,25 @@ typedef NS_ENUM(NSInteger, YZRotation) {
     }
 }
 
++ (simd_float8)getCropRotationTextureCoordinates:(int)rotation crop:(CGRect)crop {
+    if (CGRectEqualToRect(CGRectZero, crop)) {
+        return [self getRotationTextureCoordinates:rotation];
+    }
+//    NSLog(@"1234___%@", NSStringFromCGRect(crop));
+    switch (rotation) {//todo
+        case 90:
+            return YZRotateCounterclockwise;
+            break;
+        case 180:
+            return YZRotate180;
+            break;
+        case 270:
+            return YZRotateClockwise;
+            break;
+        default:
+            return YZNoRotation;
+            break;
+    }
+}
 
 @end
