@@ -44,10 +44,9 @@
 #endif
     
 #if 1
-    if (CVPixelBufferGetWidth(pixelBuffer) == 480) {
+    if (CVPixelBufferGetHeight(pixelBuffer) == 480) {
         data.cropLeft = 60;
         data.cropRight = 60;
-    } else {
         data.cropTop = 60;
         data.cropBottom = 60;
     }
@@ -59,7 +58,7 @@
 #pragma mark - YZVideoOutputDelegate
 - (void)video:(YZVideoOutput *)video pixelBuffer:(CVPixelBufferRef)pixelBuffer {
     [self showPixelBuffer:pixelBuffer];
-    //NSLog(@"OUT:%d:%d", CVPixelBufferGetWidth(pixelBuffer), CVPixelBufferGetHeight(pixelBuffer));
+//    NSLog(@"OUT:%d:%d", CVPixelBufferGetWidth(pixelBuffer), CVPixelBufferGetHeight(pixelBuffer));
 }
 
 #pragma mark - helper
