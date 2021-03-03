@@ -26,16 +26,15 @@
 
 - (void)inputVideo:(YZVideoData *)videoData {
     CVPixelBufferRef pixelBuffer = videoData.pixelBuffer;
-    size_t width = CVPixelBufferGetWidthOfPlane(pixelBuffer, 0);
-    size_t height = CVPixelBufferGetHeightOfPlane(pixelBuffer, 0);
-    if (videoData.rotation == 90 || videoData.rotation == 270) {
-        [self newDealTextureSize:CGSizeMake(height, width)];
-    } else {
-        [self newDealTextureSize:CGSizeMake(width, height)];
+    size_t width = CVPixelBufferGetWidth(pixelBuffer);
+    size_t height = CVPixelBufferGetHeight(pixelBuffer);
+    CGSize size = CGSizeMake(width, height);
+    if (![self cropTextureSize:size videoData:videoData]) {
+        return;
     }
-    
-    if (![self continueMetal]) {  return; }
 #if 1
+    width = CVPixelBufferGetWidthOfPlane(pixelBuffer, 0);
+    height = CVPixelBufferGetHeightOfPlane(pixelBuffer, 0);
     CVMetalTextureRef textureRef = NULL;
     id<MTLTexture> textureY = NULL;
     CVReturn status = CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, self.textureCache, pixelBuffer, NULL, MTLPixelFormatR8Unorm, width, height, 0, &textureRef);
@@ -79,11 +78,6 @@
     
     CVPixelBufferUnlockBaseAddress(videoData.pixelBuffer, 0);
 #endif
-    
-    
-    
-    height = CVPixelBufferGetHeight(pixelBuffer);
-    width = CVPixelBufferGetWidth(pixelBuffer);
     CFTypeRef attachment = CVBufferGetAttachment(pixelBuffer, kCVImageBufferYCbCrMatrixKey, NULL);
     if (attachment != NULL) {//fullRange
         if(CFStringCompare(attachment, kCVImageBufferYCbCrMatrix_ITU_R_601_4, 0) == kCFCompareEqualTo) {
@@ -95,11 +89,6 @@
         _colorConversion = kYZColorConversion601FullRange;
     }
     
-    [self convertYUVToRGB:textureY textureUV:textureUV rotation:videoData.rotation];
-    [self outoutVideoData:videoData];
-}
-
-- (void)convertYUVToRGB:(id<MTLTexture>)textureY textureUV:(id<MTLTexture>)textureUV rotation:(int)rotation {
     MTLRenderPassDescriptor *desc = [YZMetalDevice newRenderPassDescriptor:self.texture];
     id<MTLCommandBuffer> commandBuffer = [YZMetalDevice.defaultDevice commandBuffer];
     id<MTLRenderCommandEncoder> encoder = [commandBuffer renderCommandEncoderWithDescriptor:desc];
@@ -112,8 +101,8 @@
     
     simd_float8 vertices = [YZMetalOrientation defaultVertices];
     [encoder setVertexBytes:&vertices length:sizeof(simd_float8) atIndex:0];
-    
-    simd_float8 textureCoordinates = [YZMetalOrientation getRotationTextureCoordinates:rotation];
+    CGRect crop = [self getCropWith:size videoData:videoData];
+    simd_float8 textureCoordinates = [YZMetalOrientation getCropRotationTextureCoordinates:videoData.rotation crop:crop];
     [encoder setVertexBytes:&textureCoordinates length:sizeof(simd_float8) atIndex:1];
     [encoder setFragmentTexture:textureY atIndex:0];
     [encoder setVertexBytes:&textureCoordinates length:sizeof(simd_float8) atIndex:2];
@@ -127,5 +116,6 @@
     
     [commandBuffer commit];
     [commandBuffer waitUntilCompleted];
+    [self outoutVideoData:videoData];
 }
 @end

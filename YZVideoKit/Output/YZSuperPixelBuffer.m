@@ -38,11 +38,11 @@
     self = [super init];
     if (self) {
         CVMetalTextureCacheCreate(NULL, NULL, YZMetalDevice.defaultDevice.device, NULL, &_textureCache);
-        _pipelineState = [YZMetalDevice.defaultDevice newRenderPipeline:@"YZInputVertex" fragment:@"YZFragment"];
     }
     return self;
 }
 
+- (void)inputVideo:(YZVideoData *)videoData {}
 - (void)setOutputPixelBuffer:(YZPixelBuffer *)pixelBuffer {
     _buffer = pixelBuffer;
 }
