@@ -44,7 +44,7 @@
     data.rotation = [self getOutputRotation];
 #endif
     
-#if 0
+#if 1
     if (CVPixelBufferGetHeight(pixelBuffer) == 480) {
         data.cropLeft = 60;
         data.cropRight = 60;
@@ -59,6 +59,7 @@
 #pragma mark - YZLibyuvDelegate
 - (void)libyuv:(YZLibyuv *)yuv pixelBuffer:(CVPixelBufferRef)pixelBuffer {
     [self showPixelBuffer:pixelBuffer];
+    NSLog(@"XXX___%d:%d", CVPixelBufferGetWidth(pixelBuffer), CVPixelBufferGetHeight(pixelBuffer));
 }
 
 #pragma mark - helper
