@@ -51,12 +51,22 @@
         }
         return;
     }
-    CVPixelBufferRef pixelBuffer = NULL;
-    CVPixelBufferCreateWithBytes(kCFAllocatorDefault, width, height, kCVPixelFormatType_32BGRA, buffer, width * 4, NULL, NULL, NULL, &pixelBuffer);
-    if (pixelBuffer != NULL) {
-        [self doCutPixelBuffer:pixelBuffer edge:edge videoData:data];
-        CVPixelBufferRelease(pixelBuffer);
+    
+    size_t newWith = width - edge.left - edge.right;
+    size_t newHeight = height - edge.top - edge.bottom;
+    size_t bytesPerRow = width * 4;
+    size_t startW = bytesPerRow / 8 - (width / 2 - edge.left);
+    size_t start = edge.top * bytesPerRow + startW * 4;
+    
+    
+    CVPixelBufferRef newPixelBuffer = nil;
+    CVReturn status = CVPixelBufferCreateWithBytes(kCFAllocatorDefault, newWith, newHeight, kCVPixelFormatType_32BGRA, &buffer[start], bytesPerRow, NULL, NULL, NULL, &newPixelBuffer);
+    if (status != 0)
+    {
+        return;
     }
+    [_buffer inputVideoData:data pixelBuffer:newPixelBuffer];
+    CVPixelBufferRelease(newPixelBuffer);
 }
 #endif
 
