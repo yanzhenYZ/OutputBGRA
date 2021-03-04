@@ -39,14 +39,16 @@
         int bytesPerrow = (int)CVPixelBufferGetBytesPerRow(pixelBuffer);
         int dstStride = width * 4;
         
-        NSLog(@"123456___%d:%d:%d", bytesPerrow, bytesPerrow / 4, w);
+        //NSLog(@"123456___%d:%d:%d", bytesPerrow, bytesPerrow / 4, w);
         [YZLibyuvTool ARGBRotate:srcBuffer srcStride:bytesPerrow dstBuffer:buffer dstStride:dstStride width:w height:h rotation:videoData.rotation];
         CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
         
         
         CVPixelBufferRef newPixelBuffer = NULL;
-        CVPixelBufferCreateWithBytes(kCFAllocatorDefault, width, height, kCVPixelFormatType_32BGRA, buffer, width * 4,
-                                     NULL, NULL, NULL, &newPixelBuffer);
+        CVPixelBufferCreateWithBytes(kCFAllocatorDefault, width, height, kCVPixelFormatType_32BGRA, buffer, width * 4, NULL, NULL, NULL, &newPixelBuffer);
+        
+        //NSLog(@"123456___%d:%d:%d", CVPixelBufferGetWidth(newPixelBuffer), CVPixelBufferGetHeight(newPixelBuffer), CVPixelBufferGetBytesPerRow(newPixelBuffer));
+        
         if (pixelBuffer != NULL) {
             [_buffer inputVideoData:videoData pixelBuffer:newPixelBuffer];
             CVPixelBufferRelease(newPixelBuffer);

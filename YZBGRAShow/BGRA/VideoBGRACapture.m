@@ -92,11 +92,19 @@
         [self.session addOutput:self.dataOutput];
     }
     
+//    for (AVCaptureDeviceFormat * f in self.deviceInput.device.formats) {
+////        if (f.isMultiCamSupported) {
+//            CMVideoDimensions mi = CMVideoFormatDescriptionGetDimensions(f.formatDescription);
+//            NSLog(@"____123:%d:%d", mi.width, mi.height);
+////        }
+//    }
+    
     AVCaptureVideoPreviewLayer *previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:_session];
     previewLayer.frame = UIScreen.mainScreen.bounds;
     [_player.layer addSublayer:previewLayer];
     
     self.session.sessionPreset = AVCaptureSessionPreset640x480;
+    
 #pragma mark - ROTATION__TEST && RRR11
 #if 0
     [_session beginConfiguration];

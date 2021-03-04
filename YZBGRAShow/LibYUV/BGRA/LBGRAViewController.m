@@ -21,12 +21,21 @@
 
 @end
 
-@implementation LBGRAViewController
+@implementation LBGRAViewController {
+    CVPixelBufferRef _pixelBuffer;
+}
+
+- (void)dealloc {
+    if (_pixelBuffer) {
+        CVPixelBufferRelease(_pixelBuffer);
+        _pixelBuffer = nil;
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    [self test];
     _libyuv = [[YZLibyuv alloc] init];
     _libyuv.delegate = self;
     _context = [CIContext contextWithOptions:nil];
@@ -34,6 +43,22 @@
     _capture = [[VideoBGRACapture alloc] initWithPlayer:_mainPlayer];
     _capture.delegate = self;
     [_capture startRunning];
+}
+
+- (void)test {
+    NSDictionary *pixelAttributes = @{(NSString *)kCVPixelBufferIOSurfacePropertiesKey:@{}};
+    CVReturn result = CVPixelBufferCreate(kCFAllocatorDefault,
+                                            360,
+                                            480,
+                                            kCVPixelFormatType_32BGRA,
+                                            (__bridge CFDictionaryRef)(pixelAttributes),
+                                            &_pixelBuffer);
+    if (result != kCVReturnSuccess) {
+        NSLog(@"LBGRAViewController to create cvpixelbuffer %d", result);
+        return;
+    }
+    int by = CVPixelBufferGetBytesPerRow(_pixelBuffer);
+    NSLog(@"1234567____%d:%d", by, by / 4);
 }
 
 - (void)testPix:(CVPixelBufferRef)pixelBuffer {
@@ -54,12 +79,34 @@
     CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
 }
 
+//测试bytesPerRow/4不等于width,步长问题
+- (void)test2Buffer:(CVPixelBufferRef)pixelBuffer {
+    CVPixelBufferLockBaseAddress(_pixelBuffer, 0);
+    size_t outBytesRow = CVPixelBufferGetBytesPerRow(_pixelBuffer);
+    uint8_t *outAddress = CVPixelBufferGetBaseAddress(_pixelBuffer);
+    
+    CVPixelBufferLockBaseAddress(pixelBuffer, 0);
+    size_t bytesRow = CVPixelBufferGetBytesPerRow(pixelBuffer);
+    uint8_t *address = CVPixelBufferGetBaseAddress(pixelBuffer);
+    int height = 480;
+    size_t offset = (bytesRow - outBytesRow) / 2;
+    for (int i = 0; i < height; i++) {
+        memcpy(outAddress + i * outBytesRow, address + i * bytesRow + offset, outBytesRow);
+    }
+    
+    CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
+    CVPixelBufferUnlockBaseAddress(_pixelBuffer, 0);
+    
+//    [self showPixelBuffer:_pixelBuffer];
+    [self inputPixelBuffer:_pixelBuffer];
+}
+
 #pragma mark - VideoBGRACaptureDelegate
 - (void)capture:(VideoBGRACapture *)capture pixelBuffer:(CVPixelBufferRef)pixelBuffer {
-    [self inputPixelBuffer:pixelBuffer];
+//    [self inputPixelBuffer:pixelBuffer];
     //步长不等于bytesPerRow/4
 //    [self testPix:pixelBuffer];
-    
+    [self test2Buffer:pixelBuffer];
 }
 
 - (void)inputPixelBuffer:(CVPixelBufferRef)pixelBuffer {
