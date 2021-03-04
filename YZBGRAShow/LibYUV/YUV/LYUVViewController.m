@@ -44,7 +44,7 @@
     data.rotation = [self getOutputRotation];
 #endif
     
-#if 1
+#if 0
     if (CVPixelBufferGetHeight(pixelBuffer) == 480) {
         data.cropLeft = 60;
         data.cropRight = 60;
