@@ -54,6 +54,8 @@
 		9B9C6D3825EF7BA2008FC649 /* YZLibyuv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9C6D3725EF7BA2008FC649 /* YZLibyuv.framework */; };
 		9BCACCE025F0B2EB007307E5 /* LYUVViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCACCDF25F0B2EB007307E5 /* LYUVViewController.m */; };
 		9BCACCE925F0B32B007307E5 /* LYUV.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BCACCE725F0B32B007307E5 /* LYUV.storyboard */; };
+		9BCACCFC25F0C3E4007307E5 /* LYUVData.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BCACCFA25F0C3E4007307E5 /* LYUVData.storyboard */; };
+		9BCACD0125F0C409007307E5 /* LYUVDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCACD0025F0C409007307E5 /* LYUVDataViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +141,9 @@
 		9BCACCDE25F0B2EB007307E5 /* LYUVViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYUVViewController.h; sourceTree = "<group>"; };
 		9BCACCDF25F0B2EB007307E5 /* LYUVViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYUVViewController.m; sourceTree = "<group>"; };
 		9BCACCE825F0B32B007307E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = YZBGRAShow/Base.lproj/LYUV.storyboard; sourceTree = SOURCE_ROOT; };
+		9BCACCFB25F0C3E4007307E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = YZBGRAShow/Base.lproj/LYUVData.storyboard; sourceTree = SOURCE_ROOT; };
+		9BCACCFF25F0C409007307E5 /* LYUVDataViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYUVDataViewController.h; sourceTree = "<group>"; };
+		9BCACD0025F0C409007307E5 /* LYUVDataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYUVDataViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -305,6 +310,8 @@
 				9B9C6D3725EF7BA2008FC649 /* YZLibyuv.framework */,
 				9B9C6D3025EF76F9008FC649 /* LBGRA.storyboard */,
 				9BCACCE725F0B32B007307E5 /* LYUV.storyboard */,
+				9BCACCFA25F0C3E4007307E5 /* LYUVData.storyboard */,
+				9BCACCFE25F0C3F4007307E5 /* LYUVData */,
 				9BCACCDC25F0B28B007307E5 /* YUV */,
 				9B9C6D2525EF767D008FC649 /* BGRA */,
 			);
@@ -327,6 +334,15 @@
 				9BCACCDF25F0B2EB007307E5 /* LYUVViewController.m */,
 			);
 			path = YUV;
+			sourceTree = "<group>";
+		};
+		9BCACCFE25F0C3F4007307E5 /* LYUVData */ = {
+			isa = PBXGroup;
+			children = (
+				9BCACCFF25F0C409007307E5 /* LYUVDataViewController.h */,
+				9BCACD0025F0C409007307E5 /* LYUVDataViewController.m */,
+			);
+			path = LYUVData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -435,6 +451,7 @@
 				9B9C6B1D25ECD13B008FC649 /* LaunchScreen.storyboard in Resources */,
 				9B9C6BCA25EDD3B4008FC649 /* YUV.storyboard in Resources */,
 				9B9C6B1A25ECD13B008FC649 /* Assets.xcassets in Resources */,
+				9BCACCFC25F0C3E4007307E5 /* LYUVData.storyboard in Resources */,
 				9B9C6C1725EE14F0008FC649 /* YUVData.storyboard in Resources */,
 				9B9C6B3325ECD72E008FC649 /* BGRA.storyboard in Resources */,
 				9BCACCE925F0B32B007307E5 /* LYUV.storyboard in Resources */,
@@ -462,6 +479,7 @@
 				9B9C6B3925ECD754008FC649 /* BGRAViewController.m in Sources */,
 				9BCACCE025F0B2EB007307E5 /* LYUVViewController.m in Sources */,
 				9B9C6C0925EE13E8008FC649 /* TYUVDataCapture.m in Sources */,
+				9BCACD0125F0C409007307E5 /* LYUVDataViewController.m in Sources */,
 				9B9C6C0E25EE13F5008FC649 /* TYUVDataViewController.m in Sources */,
 				9B9C6B0F25ECD139008FC649 /* AppDelegate.m in Sources */,
 				9B9C6B2025ECD13B008FC649 /* main.m in Sources */,
@@ -555,6 +573,14 @@
 				9BCACCE825F0B32B007307E5 /* Base */,
 			);
 			name = LYUV.storyboard;
+			sourceTree = "<group>";
+		};
+		9BCACCFA25F0C3E4007307E5 /* LYUVData.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9BCACCFB25F0C3E4007307E5 /* Base */,
+			);
+			name = LYUVData.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -84,6 +84,8 @@
 		9BCACCEE25F0B515007307E5 /* LibyuvFullRangePixelBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCACCEC25F0B515007307E5 /* LibyuvFullRangePixelBuffer.m */; };
 		9BCACCF225F0C0D2007307E5 /* LibyuvVideoRangePixelBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCACCF025F0C0D2007307E5 /* LibyuvVideoRangePixelBuffer.h */; };
 		9BCACCF325F0C0D2007307E5 /* LibyuvVideoRangePixelBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCACCF125F0C0D2007307E5 /* LibyuvVideoRangePixelBuffer.m */; };
+		9BCACD0725F0C510007307E5 /* LibyuvYUVDataPixelBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCACD0525F0C510007307E5 /* LibyuvYUVDataPixelBuffer.h */; };
+		9BCACD0825F0C510007307E5 /* LibyuvYUVDataPixelBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCACD0625F0C510007307E5 /* LibyuvYUVDataPixelBuffer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -166,6 +168,8 @@
 		9BCACCEC25F0B515007307E5 /* LibyuvFullRangePixelBuffer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LibyuvFullRangePixelBuffer.m; sourceTree = "<group>"; };
 		9BCACCF025F0C0D2007307E5 /* LibyuvVideoRangePixelBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LibyuvVideoRangePixelBuffer.h; sourceTree = "<group>"; };
 		9BCACCF125F0C0D2007307E5 /* LibyuvVideoRangePixelBuffer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LibyuvVideoRangePixelBuffer.m; sourceTree = "<group>"; };
+		9BCACD0525F0C510007307E5 /* LibyuvYUVDataPixelBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LibyuvYUVDataPixelBuffer.h; sourceTree = "<group>"; };
+		9BCACD0625F0C510007307E5 /* LibyuvYUVDataPixelBuffer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LibyuvYUVDataPixelBuffer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -324,6 +328,8 @@
 				9BCACCEC25F0B515007307E5 /* LibyuvFullRangePixelBuffer.m */,
 				9BCACCF025F0C0D2007307E5 /* LibyuvVideoRangePixelBuffer.h */,
 				9BCACCF125F0C0D2007307E5 /* LibyuvVideoRangePixelBuffer.m */,
+				9BCACD0525F0C510007307E5 /* LibyuvYUVDataPixelBuffer.h */,
+				9BCACD0625F0C510007307E5 /* LibyuvYUVDataPixelBuffer.m */,
 			);
 			path = PixelBuffer;
 			sourceTree = "<group>";
@@ -360,6 +366,7 @@
 				9B9C6CD625EF7272008FC649 /* cpu_id.h in Headers */,
 				9B9C6CD425EF7272008FC649 /* scale.h in Headers */,
 				9B9C6CD325EF7272008FC649 /* scale_row.h in Headers */,
+				9BCACD0725F0C510007307E5 /* LibyuvYUVDataPixelBuffer.h in Headers */,
 				9B9C6CE225EF7272008FC649 /* convert_from.h in Headers */,
 				9B9C6CD225EF7272008FC649 /* libyuv.h in Headers */,
 			);
@@ -454,6 +461,7 @@
 				9B9C6CFE25EF7272008FC649 /* scale_common.cc in Sources */,
 				9B9C6CEE25EF7272008FC649 /* mjpeg_decoder.cc in Sources */,
 				9B9C6CF025EF7272008FC649 /* rotate_neon64.cc in Sources */,
+				9BCACD0825F0C510007307E5 /* LibyuvYUVDataPixelBuffer.m in Sources */,
 				9B9C6D0A25EF7273008FC649 /* video_common.cc in Sources */,
 				9B9C6D0E25EF7273008FC649 /* compare_gcc.cc in Sources */,
 				9B9C6CED25EF7272008FC649 /* row_win.cc in Sources */,
