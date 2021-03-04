@@ -36,8 +36,33 @@
     [_capture startRunning];
 }
 
+- (void)testPix:(CVPixelBufferRef)pixelBuffer {
+    int width = 360;
+    CVPixelBufferLockBaseAddress(pixelBuffer, 0);
+    NSInteger bytesPerRow = CVPixelBufferGetBytesPerRow(pixelBuffer);
+    uint8_t *baseAddress = (uint8_t *)CVPixelBufferGetBaseAddress(pixelBuffer);
+    CVPixelBufferRef newPixelBuffer = NULL;
+    CVReturn status = CVPixelBufferCreateWithBytes(kCFAllocatorDefault, width, 480, kCVPixelFormatType_32BGRA, &baseAddress[(640 - 480) * 2], bytesPerRow, NULL, NULL, NULL, &newPixelBuffer);
+    if (status != 0)
+    {
+        CVPixelBufferUnlockBaseAddress(pixelBuffer,0);
+        return;
+    }
+    [self inputPixelBuffer:newPixelBuffer];
+//    NSLog(@"XXX____%d")
+    CVPixelBufferRelease(newPixelBuffer);
+    CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
+}
+
 #pragma mark - VideoBGRACaptureDelegate
 - (void)capture:(VideoBGRACapture *)capture pixelBuffer:(CVPixelBufferRef)pixelBuffer {
+    [self inputPixelBuffer:pixelBuffer];
+    //步长不等于bytesPerRow/4
+//    [self testPix:pixelBuffer];
+    
+}
+
+- (void)inputPixelBuffer:(CVPixelBufferRef)pixelBuffer {
     YZLibVideoData *data = [[YZLibVideoData alloc] init];
     data.pixelBuffer = pixelBuffer;
 #pragma mark - ROTATION__TEST && RRR11

@@ -39,7 +39,7 @@
         int bytesPerrow = (int)CVPixelBufferGetBytesPerRow(pixelBuffer);
         int dstStride = width * 4;
         
-        
+        NSLog(@"123456___%d:%d:%d", bytesPerrow, bytesPerrow / 4, w);
         [YZLibyuvTool ARGBRotate:srcBuffer srcStride:bytesPerrow dstBuffer:buffer dstStride:dstStride width:w height:h rotation:videoData.rotation];
         CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
         
