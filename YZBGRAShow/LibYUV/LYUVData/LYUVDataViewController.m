@@ -92,7 +92,7 @@
 
 #pragma mark - YZLibyuvDelegate
 - (void)libyuv:(YZLibyuv *)yuv pixelBuffer:(CVPixelBufferRef)pixelBuffer {
-    [self showPixelBuffer:pixelBuffer];
+//    [self showPixelBuffer:pixelBuffer];
 }
 
 #pragma mark - helper

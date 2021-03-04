@@ -10,7 +10,11 @@
 #import "YZLibyuvTool.h"
 
 @implementation LibyuvYUVDataPixelBuffer
-
+/**640x480 rotation
+  0   CPU 2~3% 转BGRA
+  90  CPU 6~7% 转BGRA+旋转
+  180 CPU 4~5% 转BGRA+旋转
+ */
 -(void)inputVideoData:(YZLibVideoData *)videoData {
     int width = videoData.width;
     int height = videoData.height;
