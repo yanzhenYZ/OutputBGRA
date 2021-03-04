@@ -9,11 +9,13 @@
 #import "LibyuvBGRAPixelBuffer.h"
 #import "YZLibyuvPixelBuffer.h"
 #import "LibyuvFullRangePixelBuffer.h"
+#import "LibyuvVideoRangePixelBuffer.h"
 
 @interface YZLibyuv ()<YZLibyuvPixelBufferDelegate>
 @property (nonatomic, strong) YZLibyuvPixelBuffer *pixelBuffer;
 @property (nonatomic, strong) LibyuvBGRAPixelBuffer *bgraPixelBuffer;
 @property (nonatomic, strong) LibyuvFullRangePixelBuffer *fullPixelBuffer;
+@property (nonatomic, strong) LibyuvVideoRangePixelBuffer *videoPixelBuffer;
 @end
 
 @implementation YZLibyuv
@@ -33,7 +35,7 @@
         if (type == kCVPixelFormatType_32BGRA) {
             [self.bgraPixelBuffer inputVideoData:videoData];
         } else if (type == kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange) {
-            
+            [self.videoPixelBuffer inputVideoData:videoData];
         } else if (type == kCVPixelFormatType_420YpCbCr8BiPlanarFullRange) {//todo
             [self.fullPixelBuffer inputVideoData:videoData];
         }
@@ -64,5 +66,13 @@
         [_fullPixelBuffer setOutputBuffer:_pixelBuffer];
     }
     return _fullPixelBuffer;
+}
+
+- (LibyuvVideoRangePixelBuffer *)videoPixelBuffer {
+    if (!_videoPixelBuffer) {
+        _videoPixelBuffer = [[LibyuvVideoRangePixelBuffer alloc] init];
+        [_videoPixelBuffer setOutputBuffer:_pixelBuffer];
+    }
+    return _videoPixelBuffer;
 }
 @end
