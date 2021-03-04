@@ -219,8 +219,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FeC-cP-OmJ">
-                                                    <rect key="frame" x="15" y="0.0" width="33" height="50"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BGRAToI420" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FeC-cP-OmJ">
+                                                    <rect key="frame" x="15" y="0.0" width="97" height="50"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -232,6 +232,9 @@
                                                 <constraint firstItem="FeC-cP-OmJ" firstAttribute="leading" secondItem="RrY-fm-ETK" secondAttribute="leading" constant="15" id="smT-Kc-80d"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="ffg-El-ZuK" kind="show" id="3bM-Kz-sw8"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -321,7 +324,17 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qoi-cZ-hIM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1886" y="867"/>
+            <point key="canvasLocation" x="1627" y="695"/>
+        </scene>
+        <!--LBGRAToI420-->
+        <scene sceneID="uCV-KS-Ob9">
+            <objects>
+                <viewControllerPlaceholder storyboardName="LBGRAToI420" id="ffg-El-ZuK" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Ay9-r8-jbo"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1rb-4O-JP5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2011" y="920"/>
         </scene>
     </scenes>
     <resources>

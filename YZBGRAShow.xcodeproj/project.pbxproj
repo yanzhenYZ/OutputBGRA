@@ -56,6 +56,8 @@
 		9BCACCE925F0B32B007307E5 /* LYUV.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BCACCE725F0B32B007307E5 /* LYUV.storyboard */; };
 		9BCACCFC25F0C3E4007307E5 /* LYUVData.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BCACCFA25F0C3E4007307E5 /* LYUVData.storyboard */; };
 		9BCACD0125F0C409007307E5 /* LYUVDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCACD0025F0C409007307E5 /* LYUVDataViewController.m */; };
+		9BCACD2025F110CE007307E5 /* LBGRAToI420.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BCACD1E25F110CE007307E5 /* LBGRAToI420.storyboard */; };
+		9BCACD2625F1116F007307E5 /* BGRAToI420ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCACD2525F1116F007307E5 /* BGRAToI420ViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +146,9 @@
 		9BCACCFB25F0C3E4007307E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = YZBGRAShow/Base.lproj/LYUVData.storyboard; sourceTree = SOURCE_ROOT; };
 		9BCACCFF25F0C409007307E5 /* LYUVDataViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYUVDataViewController.h; sourceTree = "<group>"; };
 		9BCACD0025F0C409007307E5 /* LYUVDataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYUVDataViewController.m; sourceTree = "<group>"; };
+		9BCACD1F25F110CE007307E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = YZBGRAShow/Base.lproj/LBGRAToI420.storyboard; sourceTree = SOURCE_ROOT; };
+		9BCACD2425F1116F007307E5 /* BGRAToI420ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BGRAToI420ViewController.h; sourceTree = "<group>"; };
+		9BCACD2525F1116F007307E5 /* BGRAToI420ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BGRAToI420ViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -307,6 +312,8 @@
 		9B9C6D2425EF7588008FC649 /* LibYUV */ = {
 			isa = PBXGroup;
 			children = (
+				9BCACD2225F110E3007307E5 /* BGRaToI420 */,
+				9BCACD1E25F110CE007307E5 /* LBGRAToI420.storyboard */,
 				9B9C6D3725EF7BA2008FC649 /* YZLibyuv.framework */,
 				9B9C6D3025EF76F9008FC649 /* LBGRA.storyboard */,
 				9BCACCE725F0B32B007307E5 /* LYUV.storyboard */,
@@ -343,6 +350,15 @@
 				9BCACD0025F0C409007307E5 /* LYUVDataViewController.m */,
 			);
 			path = LYUVData;
+			sourceTree = "<group>";
+		};
+		9BCACD2225F110E3007307E5 /* BGRaToI420 */ = {
+			isa = PBXGroup;
+			children = (
+				9BCACD2425F1116F007307E5 /* BGRAToI420ViewController.h */,
+				9BCACD2525F1116F007307E5 /* BGRAToI420ViewController.m */,
+			);
+			path = BGRaToI420;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -454,6 +470,7 @@
 				9BCACCFC25F0C3E4007307E5 /* LYUVData.storyboard in Resources */,
 				9B9C6C1725EE14F0008FC649 /* YUVData.storyboard in Resources */,
 				9B9C6B3325ECD72E008FC649 /* BGRA.storyboard in Resources */,
+				9BCACD2025F110CE007307E5 /* LBGRAToI420.storyboard in Resources */,
 				9BCACCE925F0B32B007307E5 /* LYUV.storyboard in Resources */,
 				9B9C6B1825ECD139008FC649 /* Main.storyboard in Resources */,
 			);
@@ -483,6 +500,7 @@
 				9B9C6C0E25EE13F5008FC649 /* TYUVDataViewController.m in Sources */,
 				9B9C6B0F25ECD139008FC649 /* AppDelegate.m in Sources */,
 				9B9C6B2025ECD13B008FC649 /* main.m in Sources */,
+				9BCACD2625F1116F007307E5 /* BGRAToI420ViewController.m in Sources */,
 				9B9C6BC025EDD381008FC649 /* YUVRangeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -581,6 +599,14 @@
 				9BCACCFB25F0C3E4007307E5 /* Base */,
 			);
 			name = LYUVData.storyboard;
+			sourceTree = "<group>";
+		};
+		9BCACD1E25F110CE007307E5 /* LBGRAToI420.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9BCACD1F25F110CE007307E5 /* Base */,
+			);
+			name = LBGRAToI420.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
