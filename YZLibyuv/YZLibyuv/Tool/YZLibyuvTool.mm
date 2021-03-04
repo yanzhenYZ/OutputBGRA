@@ -24,11 +24,10 @@
 + (void)NV12ToARGB:(uint8_t *)srcY strideY:(int)strideY srcUV:(uint8_t *)srcUV strideUV:(int)strideUV argbBuffer:(uint8_t *)argb strideARGB:(int)strideARGB width:(int)width height:(int)height {
     
     libyuv::NV12ToARGB(srcY, strideY, srcUV, strideUV, argb, strideARGB, width, height);
-    
-    //libyuv::I420ToBGRA(<#const uint8 *src_y#>, <#int src_stride_y#>, <#const uint8 *src_u#>, <#int src_stride_u#>, <#const uint8 *src_v#>, <#int src_stride_v#>, <#uint8 *dst_argb#>, <#int dst_stride_argb#>, <#int width#>, <#int height#>)
 }
 
 + (void)I420ToBGRA:(uint8_t *)srcY strideY:(int)strideY srcU:(uint8_t *)srcU strideU:(int)strideU srcV:(uint8_t *)srcV strideV:(int)strideV bgraBuffer:(uint8_t *)bgra strideARGB:(int)strideARGB width:(int)width height:(int)height {
-    libyuv::I420ToBGRA(srcY, strideY, srcU, strideU, srcV, strideV, bgra, strideARGB, width, height);
+    //not use I420ToBGRA
+    libyuv::I420ToARGB(srcY, strideY, srcU, strideU, srcV, strideV, bgra, strideARGB, width, height);
 }
 @end

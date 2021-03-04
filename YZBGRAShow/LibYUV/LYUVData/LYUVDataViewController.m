@@ -46,7 +46,7 @@
     size_t yBytesPow = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 0);
     //NSLog(@"___1234:%d:%d:%d", yWidth, yheight, yBytesPow);
     
-    size_t uvWidth = CVPixelBufferGetWidthOfPlane(pixelBuffer, 1);
+    //size_t uvWidth = CVPixelBufferGetWidthOfPlane(pixelBuffer, 1);
     size_t uvheight = CVPixelBufferGetHeightOfPlane(pixelBuffer, 1);
     int8_t *uvBuffer = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1);
     size_t uvBytesPow = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 1);
@@ -69,7 +69,7 @@
     
     data.uStride = uvBytesPow / 2;
     data.uBuffer = uBuffer;
-    data.vStride = uvBytesPow / 2;
+    data.vStride = data.uStride;
     data.vBuffer = vBuffer;
     
 #if 0

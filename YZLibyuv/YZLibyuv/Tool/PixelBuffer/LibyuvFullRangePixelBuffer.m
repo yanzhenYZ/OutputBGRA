@@ -6,19 +6,11 @@
 //
 
 #import "LibyuvFullRangePixelBuffer.h"
-#import "YZLibyuvPixelBuffer.h"
 #import "YZLibVideoData.h"
 #import "YZLibyuvTool.h"
 
-@interface LibyuvFullRangePixelBuffer ()
-@property (nonatomic, strong) YZLibyuvPixelBuffer *buffer;
-@end
-
 @implementation LibyuvFullRangePixelBuffer
 
-- (void)setOutputBuffer:(YZLibyuvPixelBuffer *)buffer {
-    _buffer = buffer;
-}
 /**640x480 rotation
   0   CPU 2~3% 转BGRA
   90  CPU 6~7% 转BGRA+旋转
@@ -39,13 +31,7 @@
     
     CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
     if (videoData.rotation == 0) {
-        CVPixelBufferRef newPixelBuffer = NULL;
-        CVPixelBufferCreateWithBytes(kCFAllocatorDefault, width, height, kCVPixelFormatType_32BGRA, buffer, width * 4, NULL, NULL, NULL, &newPixelBuffer);
-        if (newPixelBuffer != NULL) {
-            [_buffer inputVideoData:videoData pixelBuffer:newPixelBuffer];
-            CVPixelBufferRelease(newPixelBuffer);
-        }
-        free(buffer);
+        [self outputPixelBuffer:buffer width:width height:height videoData:videoData];
     } else {
         uint8_t *dstBuffer = malloc(width * height * 4);
         int dstW = width;
@@ -55,16 +41,10 @@
             dstH = width;
         }
         [YZLibyuvTool ARGBRotate:buffer srcStride:width * 4 dstBuffer:dstBuffer dstStride:dstW * 4 width:width height:height rotation:videoData.rotation];
-        
-        CVPixelBufferRef newPixelBuffer = NULL;
-        CVPixelBufferCreateWithBytes(kCFAllocatorDefault, dstW, dstH, kCVPixelFormatType_32BGRA, dstBuffer, dstW * 4, NULL, NULL, NULL, &newPixelBuffer);
-        if (newPixelBuffer != NULL) {
-            [_buffer inputVideoData:videoData pixelBuffer:newPixelBuffer];
-            CVPixelBufferRelease(newPixelBuffer);
-        }
-        free(buffer);
+        [self outputPixelBuffer:dstBuffer width:dstW height:dstH videoData:videoData];
         free(dstBuffer);
     }
+    free(buffer);
 }
 
 @end

@@ -5,13 +5,8 @@
 //  Created by yanzhen on 2021/3/4.
 //
 
-#import <Foundation/Foundation.h>
+#import "YZLibyuvSuperPixelBuffer.h"
 
-@class YZLibVideoData;
-@class YZLibyuvPixelBuffer;
-@interface LibyuvVideoRangePixelBuffer : NSObject
-- (void)setOutputBuffer:(YZLibyuvPixelBuffer *)buffer;
-
-- (void)inputVideoData:(YZLibVideoData *)videoData;
+@interface LibyuvVideoRangePixelBuffer : YZLibyuvSuperPixelBuffer
 
 @end

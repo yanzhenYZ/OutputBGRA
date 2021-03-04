@@ -6,29 +6,29 @@
 //
 
 #import "LibyuvYUVDataPixelBuffer.h"
-#import "YZLibyuvPixelBuffer.h"
 #import "YZLibVideoData.h"
 #import "YZLibyuvTool.h"
 
-@interface LibyuvYUVDataPixelBuffer ()
-@property (nonatomic, strong) YZLibyuvPixelBuffer *buffer;
-@end
-
 @implementation LibyuvYUVDataPixelBuffer
--(void)setOutputBuffer:(YZLibyuvPixelBuffer *)buffer {
-    _buffer = buffer;
-}
 
 -(void)inputVideoData:(YZLibVideoData *)videoData {
-    uint8_t *buffer = malloc(videoData.width * videoData.height * 4);
+    int width = videoData.width;
+    int height = videoData.height;
+    uint8_t *buffer = malloc(width * height * 4);
+    [YZLibyuvTool I420ToBGRA:(uint8_t *)videoData.yBuffer strideY:videoData.yStride srcU:(uint8_t *)videoData.uBuffer strideU:videoData.uStride srcV:(uint8_t *)videoData.vBuffer strideV:videoData.vStride bgraBuffer:buffer strideARGB:width * 4 width:width height:height];
     if (videoData.rotation == 0) {
-        [YZLibyuvTool I420ToBGRA:videoData.yBuffer strideY:videoData.yStride srcU:videoData.uBuffer strideU:videoData.uStride srcV:videoData.vBuffer strideV:videoData.vStride bgraBuffer:buffer strideARGB:videoData.width * 4 width:videoData.width height:videoData.height];
-        CVPixelBufferRef newPixelBuffer = NULL;
-        CVPixelBufferCreateWithBytes(kCFAllocatorDefault, videoData.width, videoData.height, kCVPixelFormatType_32BGRA, buffer, videoData.width * 4, NULL, NULL, NULL, &newPixelBuffer);
-        if (newPixelBuffer != NULL) {
-            [_buffer inputVideoData:videoData pixelBuffer:newPixelBuffer];
-            CVPixelBufferRelease(newPixelBuffer);
+        [self outputPixelBuffer:buffer width:width height:height videoData:videoData];
+    } else {
+        uint8_t *dstBuffer = malloc(videoData.width * videoData.height * 4);
+        int dstW = width;
+        int dstH = height;
+        if (videoData.rotation == 90 || videoData.rotation == 270) {
+            dstW = height;
+            dstH = width;
         }
+        [YZLibyuvTool ARGBRotate:buffer srcStride:width * 4 dstBuffer:dstBuffer dstStride:dstW * 4 width:width height:height rotation:videoData.rotation];
+        [self outputPixelBuffer:dstBuffer width:dstW height:dstH videoData:videoData];
+        free(dstBuffer);
     }
     free(buffer);
 }
