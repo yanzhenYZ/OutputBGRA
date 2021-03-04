@@ -41,7 +41,7 @@
     if (videoData.rotation == 0) {
         CVPixelBufferRef newPixelBuffer = NULL;
         CVPixelBufferCreateWithBytes(kCFAllocatorDefault, width, height, kCVPixelFormatType_32BGRA, buffer, width * 4, NULL, NULL, NULL, &newPixelBuffer);
-        if (pixelBuffer != NULL) {
+        if (newPixelBuffer != NULL) {
             [_buffer inputVideoData:videoData pixelBuffer:newPixelBuffer];
             CVPixelBufferRelease(newPixelBuffer);
         }
@@ -58,7 +58,7 @@
         
         CVPixelBufferRef newPixelBuffer = NULL;
         CVPixelBufferCreateWithBytes(kCFAllocatorDefault, dstW, dstH, kCVPixelFormatType_32BGRA, dstBuffer, dstW * 4, NULL, NULL, NULL, &newPixelBuffer);
-        if (pixelBuffer != NULL) {
+        if (newPixelBuffer != NULL) {
             [_buffer inputVideoData:videoData pixelBuffer:newPixelBuffer];
             CVPixelBufferRelease(newPixelBuffer);
         }

@@ -53,7 +53,7 @@
         
         //NSLog(@"123456___%d:%d:%d", CVPixelBufferGetWidth(newPixelBuffer), CVPixelBufferGetHeight(newPixelBuffer), CVPixelBufferGetBytesPerRow(newPixelBuffer));
         
-        if (pixelBuffer != NULL) {
+        if (newPixelBuffer != NULL) {
             [_buffer inputVideoData:videoData pixelBuffer:newPixelBuffer];
             CVPixelBufferRelease(newPixelBuffer);
             free(buffer);
