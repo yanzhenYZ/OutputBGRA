@@ -12,7 +12,6 @@
 #import "LibyuvVideoRangePixelBuffer.h"
 #import "LibyuvYUVDataPixelBuffer.h"
 /** todo
- 1. nv12 nv21
  2. test bgra转I420
  */
 @interface YZLibyuv ()<YZLibyuvPixelBufferDelegate>

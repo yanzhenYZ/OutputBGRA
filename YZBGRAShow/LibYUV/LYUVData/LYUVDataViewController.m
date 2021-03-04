@@ -35,10 +35,42 @@
 
 #pragma mark - YUVCaptureDelegate
 - (void)capture:(YUVCapture *)capture pixelBuffer:(CVPixelBufferRef)pixelBuffer {
-    [self inputVideoData:pixelBuffer];
+#if 0
+    [self inputI420VideoData:pixelBuffer];
+#else
+    [self inputNV12VideoData:pixelBuffer];
+#endif
 }
 
-- (void)inputVideoData:(CVPixelBufferRef)pixelBuffer {
+- (void)inputNV12VideoData:(CVPixelBufferRef)pixelBuffer {
+    CVPixelBufferLockBaseAddress(pixelBuffer, 0);
+    size_t yWidth = CVPixelBufferGetWidthOfPlane(pixelBuffer, 0);
+    size_t yheight = CVPixelBufferGetHeightOfPlane(pixelBuffer, 0);
+    int8_t *yBuffer = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 0);
+    size_t yBytesPow = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 0);
+    //NSLog(@"___1234:%d:%d:%d", yWidth, yheight, yBytesPow);
+    
+    //size_t uvWidth = CVPixelBufferGetWidthOfPlane(pixelBuffer, 1);
+    //size_t uvheight = CVPixelBufferGetHeightOfPlane(pixelBuffer, 1);
+    int8_t *uvBuffer = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1);
+    size_t uvBytesPow = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 1);
+    //NSLog(@"___1234:%d:%d:%d", uvWidth, uvheight, uvBytesPow);
+    CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
+    YZLibVideoData *data = [[YZLibVideoData alloc] init];
+    data.isNV12 = YES;
+    data.width = (int)yWidth;
+    data.height = (int)yheight;
+    data.yStride = (int)yBytesPow;
+    data.yBuffer = yBuffer;
+    
+    data.uvStride = (int)uvBytesPow;
+    data.uvBuffer = uvBuffer;
+    
+    data.rotation = [self getOutputRotation];
+    [_libYUV inputVideoData:data];
+}
+
+- (void)inputI420VideoData:(CVPixelBufferRef)pixelBuffer {
     CVPixelBufferLockBaseAddress(pixelBuffer, 0);
     size_t yWidth = CVPixelBufferGetWidthOfPlane(pixelBuffer, 0);
     size_t yheight = CVPixelBufferGetHeightOfPlane(pixelBuffer, 0);
@@ -72,7 +104,7 @@
     data.vStride = data.uStride;
     data.vBuffer = vBuffer;
     
-#if 1
+#if 0
     if (CVPixelBufferGetHeight(pixelBuffer) == 480) {
         data.cropLeft = 60;
         data.cropRight = 60;
