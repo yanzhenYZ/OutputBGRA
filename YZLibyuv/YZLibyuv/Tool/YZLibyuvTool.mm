@@ -16,7 +16,7 @@
     } else if (rotation == 180) {
         mode = libyuv::kRotate180;
     } else if (rotation == 270) {
-        mode = libyuv::kRotate0;
+        mode = libyuv::kRotate270;
     }
     libyuv::ARGBRotate(srcBuffer, srcStride, dstBuffer, dstStride, width, height, mode);
 }

@@ -24,13 +24,13 @@
         [_buffer inputVideoData:videoData pixelBuffer:videoData.pixelBuffer];
     } else {//todo
         CVPixelBufferRef pixelBuffer = videoData.pixelBuffer;
-        size_t w = CVPixelBufferGetWidth(pixelBuffer);
-        size_t h = CVPixelBufferGetHeight(pixelBuffer);
-        int width = (int)w;
-        int height = (int)h;
+        int w = (int)CVPixelBufferGetWidth(pixelBuffer);
+        int h = (int)CVPixelBufferGetHeight(pixelBuffer);
+        int width = w;
+        int height = h;
         if (videoData.rotation == 90 || videoData.rotation ==  270) {
-            width = (int)h;
-            height = (int)w;
+            width = h;
+            height = w;
         }
         
         uint8_t *buffer = malloc(width * height * 4);
@@ -40,7 +40,7 @@
         int dstStride = width * 4;
         
         
-        [YZLibyuvTool ARGBRotate:srcBuffer srcStride:bytesPerrow dstBuffer:buffer dstStride:dstStride width:width height:height rotation:videoData.rotation];
+        [YZLibyuvTool ARGBRotate:srcBuffer srcStride:bytesPerrow dstBuffer:buffer dstStride:dstStride width:w height:h rotation:videoData.rotation];
         CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
         
         
