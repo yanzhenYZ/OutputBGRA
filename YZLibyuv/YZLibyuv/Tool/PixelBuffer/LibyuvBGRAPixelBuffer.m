@@ -19,6 +19,10 @@
     _buffer = buffer;
 }
 
+/** rotation
+ 90  4~5%CPU
+ 180 2%
+ */
 - (void)inputVideoData:(YZLibVideoData *)videoData {
     if (videoData.rotation == 0) {
         [_buffer inputVideoData:videoData pixelBuffer:videoData.pixelBuffer];

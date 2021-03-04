@@ -52,6 +52,8 @@
 		9B9C6D2825EF7690008FC649 /* LBGRAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C6D2725EF7690008FC649 /* LBGRAViewController.m */; };
 		9B9C6D3225EF76F9008FC649 /* LBGRA.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B9C6D3025EF76F9008FC649 /* LBGRA.storyboard */; };
 		9B9C6D3825EF7BA2008FC649 /* YZLibyuv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9C6D3725EF7BA2008FC649 /* YZLibyuv.framework */; };
+		9BCACCE025F0B2EB007307E5 /* LYUVViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCACCDF25F0B2EB007307E5 /* LYUVViewController.m */; };
+		9BCACCE925F0B32B007307E5 /* LYUV.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BCACCE725F0B32B007307E5 /* LYUV.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +136,9 @@
 		9B9C6D2725EF7690008FC649 /* LBGRAViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LBGRAViewController.m; sourceTree = "<group>"; };
 		9B9C6D3125EF76F9008FC649 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = YZBGRAShow/Base.lproj/LBGRA.storyboard; sourceTree = SOURCE_ROOT; };
 		9B9C6D3725EF7BA2008FC649 /* YZLibyuv.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YZLibyuv.framework; sourceTree = "<group>"; };
+		9BCACCDE25F0B2EB007307E5 /* LYUVViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYUVViewController.h; sourceTree = "<group>"; };
+		9BCACCDF25F0B2EB007307E5 /* LYUVViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYUVViewController.m; sourceTree = "<group>"; };
+		9BCACCE825F0B32B007307E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = YZBGRAShow/Base.lproj/LYUV.storyboard; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -299,6 +304,8 @@
 			children = (
 				9B9C6D3725EF7BA2008FC649 /* YZLibyuv.framework */,
 				9B9C6D3025EF76F9008FC649 /* LBGRA.storyboard */,
+				9BCACCE725F0B32B007307E5 /* LYUV.storyboard */,
+				9BCACCDC25F0B28B007307E5 /* YUV */,
 				9B9C6D2525EF767D008FC649 /* BGRA */,
 			);
 			path = LibYUV;
@@ -311,6 +318,15 @@
 				9B9C6D2725EF7690008FC649 /* LBGRAViewController.m */,
 			);
 			path = BGRA;
+			sourceTree = "<group>";
+		};
+		9BCACCDC25F0B28B007307E5 /* YUV */ = {
+			isa = PBXGroup;
+			children = (
+				9BCACCDE25F0B2EB007307E5 /* LYUVViewController.h */,
+				9BCACCDF25F0B2EB007307E5 /* LYUVViewController.m */,
+			);
+			path = YUV;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -421,6 +437,7 @@
 				9B9C6B1A25ECD13B008FC649 /* Assets.xcassets in Resources */,
 				9B9C6C1725EE14F0008FC649 /* YUVData.storyboard in Resources */,
 				9B9C6B3325ECD72E008FC649 /* BGRA.storyboard in Resources */,
+				9BCACCE925F0B32B007307E5 /* LYUV.storyboard in Resources */,
 				9B9C6B1825ECD139008FC649 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -443,6 +460,7 @@
 				9B9C6D2825EF7690008FC649 /* LBGRAViewController.m in Sources */,
 				9B9C6BCE25EDD3F3008FC649 /* YUVCapture.m in Sources */,
 				9B9C6B3925ECD754008FC649 /* BGRAViewController.m in Sources */,
+				9BCACCE025F0B2EB007307E5 /* LYUVViewController.m in Sources */,
 				9B9C6C0925EE13E8008FC649 /* TYUVDataCapture.m in Sources */,
 				9B9C6C0E25EE13F5008FC649 /* TYUVDataViewController.m in Sources */,
 				9B9C6B0F25ECD139008FC649 /* AppDelegate.m in Sources */,
@@ -529,6 +547,14 @@
 				9B9C6D3125EF76F9008FC649 /* Base */,
 			);
 			name = LBGRA.storyboard;
+			sourceTree = "<group>";
+		};
+		9BCACCE725F0B32B007307E5 /* LYUV.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9BCACCE825F0B32B007307E5 /* Base */,
+			);
+			name = LYUV.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -700,7 +726,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20210303;
+				CURRENT_PROJECT_VERSION = 20210304;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 7XP66VHL84;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -732,7 +758,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20210303;
+				CURRENT_PROJECT_VERSION = 20210304;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 7XP66VHL84;
 				DYLIB_COMPATIBILITY_VERSION = 1;

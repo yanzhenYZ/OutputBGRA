@@ -103,10 +103,10 @@
 
 #pragma mark - VideoBGRACaptureDelegate
 - (void)capture:(VideoBGRACapture *)capture pixelBuffer:(CVPixelBufferRef)pixelBuffer {
-//    [self inputPixelBuffer:pixelBuffer];
+    [self inputPixelBuffer:pixelBuffer];
     //步长不等于bytesPerRow/4
 //    [self testPix:pixelBuffer];
-    [self test2Buffer:pixelBuffer];
+//    [self test2Buffer:pixelBuffer];
 }
 
 - (void)inputPixelBuffer:(CVPixelBufferRef)pixelBuffer {
@@ -132,7 +132,7 @@
 
 #pragma mark - YZLibyuvDelegate
 -(void)libyuv:(YZLibyuv *)yuv pixelBuffer:(CVPixelBufferRef)pixelBuffer {
-    [self showPixelBuffer:pixelBuffer];
+//    [self showPixelBuffer:pixelBuffer];
 }
 
 #pragma mark - helper
