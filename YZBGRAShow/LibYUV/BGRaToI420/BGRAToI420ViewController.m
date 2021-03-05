@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *mainPlayer;
 @property (weak, nonatomic) IBOutlet UIImageView *showPlayer;
 
+@property (nonatomic, strong) YZLibyuv *libyuv;
 @property (nonatomic, strong) VideoBGRACapture *capture;
 @property (nonatomic, strong) CIContext *context;
 @end
@@ -24,6 +25,8 @@
     // Do any additional setup after loading the view.
     
     _context = [CIContext contextWithOptions:nil];
+    _libyuv = [[YZLibyuv alloc] init];
+    _libyuv.delegate = self;
     
     _capture = [[VideoBGRACapture alloc] initWithPlayer:_mainPlayer];
     _capture.delegate = self;
@@ -32,9 +35,49 @@
 
 #pragma mark - VideoBGRACaptureDelegate
 - (void)capture:(VideoBGRACapture *)capture pixelBuffer:(CVPixelBufferRef)pixelBuffer {
+    int width = (int)CVPixelBufferGetWidth(pixelBuffer);
+    int height = (int)CVPixelBufferGetHeight(pixelBuffer);
+    int bgraStride = CVPixelBufferGetBytesPerRow(pixelBuffer);
+    CVPixelBufferLockBaseAddress(pixelBuffer, 0);
+    uint8_t *bgra = CVPixelBufferGetBaseAddress(pixelBuffer);
     
+    uint8_t *y = malloc(width * height);
+    uint8_t *u = malloc(width * height / 4);
+    uint8_t *v = malloc(width * height / 4);
+    [YZLibyuv BGRAToI420:bgra bgraStride:bgraStride dstY:y strideY:width dstU:u strideU:width / 2 dstV:v strideV:width / 2 width:width height:height];
+    CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
+    
+    YZLibVideoData *data = [[YZLibVideoData alloc] init];
+    data.width = width;
+    data.height = height;
+    data.yStride = width;
+    data.yBuffer = y;
+    
+    data.uStride = width / 2;
+    data.uBuffer = u;
+    data.vStride = data.uStride;
+    data.vBuffer = v;
+    
+#if 0
+    if (CVPixelBufferGetHeight(pixelBuffer) == 480) {
+        data.cropLeft = 60;
+        data.cropRight = 60;
+        data.cropTop = 60;
+        data.cropBottom = 60;
+    }
+#endif
+    
+    data.rotation = [self getOutputRotation];
+    [_libyuv inputVideoData:data];
+    
+    free(y);
+    free(u);
+    free(v);
 }
 
+-(void)libyuv:(YZLibyuv *)yuv pixelBuffer:(CVPixelBufferRef)pixelBuffer {
+    [self showPixelBuffer:pixelBuffer];
+}
 
 #pragma mark - helper
 - (void)showPixelBuffer:(CVPixelBufferRef)pixel {

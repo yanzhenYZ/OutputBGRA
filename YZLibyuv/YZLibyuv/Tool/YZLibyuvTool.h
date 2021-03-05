@@ -14,5 +14,7 @@
 + (void)NV12ToARGB:(uint8_t *)srcY strideY:(int)strideY srcUV:(uint8_t *)srcUV strideUV:(int)strideUV argbBuffer:(uint8_t *)argb strideARGB:(int)strideARGB width:(int)width height:(int)height;
 
 + (void)I420ToBGRA:(uint8_t *)srcY strideY:(int)strideY srcU:(uint8_t *)srcU strideU:(int)strideU srcV:(uint8_t *)srcV strideV:(int)strideV bgraBuffer:(uint8_t *)bgra strideARGB:(int)strideARGB width:(int)width height:(int)height;
+
++ (void)BGRAToI420:(uint8_t *)bgra bgraStride:(int)bgraStride dstY:(uint8_t *)y strideY:(int)strideY dstU:(uint8_t *)u strideU:(int)strideU dstV:(uint8_t *)v strideV:(int)strideV width:(int)width height:(int)height;
 @end
 

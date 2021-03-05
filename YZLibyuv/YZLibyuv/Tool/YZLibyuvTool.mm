@@ -30,4 +30,8 @@
     //not use I420ToBGRA
     libyuv::I420ToARGB(srcY, strideY, srcU, strideU, srcV, strideV, bgra, strideARGB, width, height);
 }
+
++ (void)BGRAToI420:(uint8_t *)bgra bgraStride:(int)bgraStride dstY:(uint8_t *)y strideY:(int)strideY dstU:(uint8_t *)u strideU:(int)strideU dstV:(uint8_t *)v strideV:(int)strideV width:(int)width height:(int)height {
+    libyuv::ARGBToI420(bgra, bgraStride, y, strideY, u, strideU, v, strideV, width, height);
+}
 @end
