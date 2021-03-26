@@ -60,6 +60,7 @@
     CGRect crop = [self getCropWith:CGSizeMake(width, height) videoData:videoData];
     simd_float8 textureCoordinates = [YZMetalOrientation getCropRotationTextureCoordinates:videoData.rotation crop:crop];
     [encoder setVertexBytes:&textureCoordinates length:sizeof(simd_float8) atIndex:1];
+    //encoder setFragmentBytes:<#(nonnull const void *)#> length:<#(NSUInteger)#> atIndex:<#(NSUInteger)#>
     [encoder setFragmentTexture:textureY atIndex:0];
     [encoder setVertexBytes:&textureCoordinates length:sizeof(simd_float8) atIndex:2];
     [encoder setFragmentTexture:textureU atIndex:1];

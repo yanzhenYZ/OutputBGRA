@@ -8,7 +8,7 @@
 #include <metal_stdlib>
 using namespace metal;
 
-constant half3x3 YZYUVDATAMAT = half3x3(half3(1.164,1.164,1.164),half3(0.0,-0.213,2.112),half3(1.793,-0.533,0.0));
+//constant half3x3 YZYUVDATAMAT = half3x3(half3(1.164,1.164,1.164),half3(0.0,-0.213,2.112),half3(1.793,-0.533,0.0));
 
 struct YZYUVDataToRGBVertexIO
 {
@@ -46,6 +46,7 @@ fragment half4 YZYUVDataConversionFullRangeFragment(YZYUVDataToRGBVertexIO fragm
     yuv.y = inputTexture2.sample(quadSampler, fragmentInput.textureCoordinate2).r - half(0.5);
     yuv.z = inputTexture3.sample(quadSampler, fragmentInput.textureCoordinate3).r - half(0.5);
 
+    half3x3 YZYUVDATAMAT = half3x3(half3(1.164),half3(0.0,-0.213,2.112),half3(1.793,-0.533,0.0));
     half3 rgb = YZYUVDATAMAT * yuv;
     
     return half4(rgb, 1.0);
