@@ -61,6 +61,10 @@
 + (void)BGRAToI420:(uint8_t *)bgra bgraStride:(int)bgraStride dstY:(uint8_t *)y strideY:(int)strideY dstU:(uint8_t *)u strideU:(int)strideU dstV:(uint8_t *)v strideV:(int)strideV width:(int)width height:(int)height {
     [YZLibyuvTool BGRAToI420:bgra bgraStride:bgraStride dstY:y strideY:strideY dstU:u strideU:strideU dstV:v strideV:strideV width:width height:height];
 }
+
++ (void)BGRAToNV12:(uint8_t *)bgra bgraStride:(int)bgraStride dstY:(uint8_t *)y strideY:(int)strideY dstUV:(uint8_t *)uv strideUV:(int)strideUV width:(int)width height:(int)height {
+    [YZLibyuvTool BGRAToNV12:bgra bgraStride:bgraStride dstY:y strideY:strideY dstUV:uv strideUV:strideUV width:width height:height];
+}
 #pragma mark - lazy var
 - (LibyuvBGRAPixelBuffer *)bgraPixelBuffer {
     if (!_bgraPixelBuffer) {

@@ -34,4 +34,8 @@
 + (void)BGRAToI420:(uint8_t *)bgra bgraStride:(int)bgraStride dstY:(uint8_t *)y strideY:(int)strideY dstU:(uint8_t *)u strideU:(int)strideU dstV:(uint8_t *)v strideV:(int)strideV width:(int)width height:(int)height {
     libyuv::ARGBToI420(bgra, bgraStride, y, strideY, u, strideU, v, strideV, width, height);
 }
+
++ (void)BGRAToNV12:(uint8_t *)bgra bgraStride:(int)bgraStride dstY:(uint8_t *)y strideY:(int)strideY dstUV:(uint8_t *)uv strideUV:(int)strideUV width:(int)width height:(int)height {
+    libyuv::ARGBToNV12(bgra, bgraStride, y, strideY, uv, strideUV, width, height);
+}
 @end
